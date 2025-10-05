@@ -6,12 +6,13 @@
     # REMOVED: inputs.catppuccin.homeModules.catppuccin - this is handled in catppuccin.nix
     ./wofi.nix
     ./home-modules/packages.nix
-    ./home-modules/zsh.nix    
     ./home-modules/fcitx5.nix
-    ./home-modules/nixvim/nixvim.nix
     ./home-modules/catppuccin.nix
-    ./home-modules/mpd-rmpc/mpd-rmpc.nix
     ./home-modules/desktopShortcuts.nix
+    ./home-modules/gog.nix
+    ./home-modules/zsh.nix    
+    ./home-modules/nixvim/nixvim.nix
+    ./home-modules/mpd-rmpc/mpd-rmpc.nix
   ];
 
   # Home Manager needs a bit of information about you and the
