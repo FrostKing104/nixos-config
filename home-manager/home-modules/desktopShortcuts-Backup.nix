@@ -4,14 +4,14 @@
 { pkgs, ... }:
 
 {
-  # define the required packages
   home.packages = [
     pkgs.chromium
     pkgs.papirus-icon-theme
   ];
 
-  # Define all your web app desktop entries in this set
+  # --- Desktop Entries --- #
   xdg.desktopEntries = {
+    # -- WebApps -- #
     "youtube-music" = {
       name = "YouTube Music";
       exec = "${pkgs.chromium}/bin/chromium --app=https://music.youtube.com";
@@ -40,6 +40,33 @@
       type = "Application";
       # Fixed: Use only one main category to avoid menu duplication
       categories = [ "Office" ];
+    };
+    # -- Obsidian Vaults -- #
+    "obsidian-main" = {
+      name = "Obsidian Main Vault";
+      comment = "Open the main Obsidian vault";
+      exec = "obsidian-fixed obsidian://vault/45be03fe07ce1733";
+      icon = "obsidian";
+      type = "Application";
+      categories = [ "Office" "Utility" ];
+    };
+
+    "obsidian-college" = {
+      name = "Obsidian College Vault";
+      comment = "Open the college Obsidian vault";
+      exec = "obsidian-fixed obsidian://vault/bb1b079b93a59a4e";
+      icon = "obsidian";
+      type = "Application";
+      categories = [ "Office" "Utility" ];
+    };
+
+    "obsidian-writing" = {
+      name = "Obsidian Writing Vault";
+      comment = "Open the writing Obsidian vault";
+      exec = "obsidian-fixed obsidian://vault/5088080f897a87ad";
+      icon = "obsidian";
+      type = "Application";
+      categories = [ "Office" "Utility" ];
     };
   };
 }

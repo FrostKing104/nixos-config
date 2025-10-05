@@ -1,12 +1,6 @@
 # ~/nixos-config/packages.nix
 { config, pkgs, ... }:
 
-let
-  obsidian-fixed = pkgs.writeShellScriptBin "obsidian" ''
-    #!${pkgs.runtimeShell}
-    exec ${pkgs.obsidian}/bin/obsidian --ozone-platform=x11 "$@"
-  '';
-in
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -56,8 +50,6 @@ in
     swappy
     glib
     signal-desktop
-    # obsidian
-    obsidian-fixed
     sassc
     gtk-engine-murrine
     gnome-themes-extra
