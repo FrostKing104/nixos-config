@@ -91,6 +91,7 @@
     brave
     lm_sensors
     opentabletdriver
+    commitizen
   ];
 
   services.hardware.openrgb.enable = true;
