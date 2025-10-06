@@ -9,7 +9,6 @@
     ./home-modules/fcitx5.nix
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
-    ./home-modules/gog.nix
     ./home-modules/zsh.nix    
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix
