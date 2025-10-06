@@ -92,6 +92,7 @@
     lm_sensors
     opentabletdriver
     commitizen
+    git-lfs
   ];
 
   services.hardware.openrgb.enable = true;
