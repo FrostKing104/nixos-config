@@ -6,17 +6,17 @@
     # Aliases
     shellAliases = {
       # Editing Configs
-      config = "nvim ~/nixos-config/configuration.nix";
-      packages = "nvim ~/nixos-config/packages.nix";
-      hm = "nvim ~/nixos-config/home-manager/home.nix";
-      hmpackages = "nvim ~/nixos-config/home-manager/home-modules/packages.nix";
+      config = "nvim ~/nixosConfig/configuration.nix";
+      packages = "nvim ~/nixosConfig/packages.nix";
+      hm = "nvim ~/nixosConfig/home-manager/home.nix";
+      hmpackages = "nvim ~/nixosConfig/home-manager/home-modules/packages.nix";
       # Rebuilding
-      testflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild test --flake ~/nixos-config";
-      switchflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild switch --flake ~/nixos-config";
+      testflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild test --flake ~/nixosConfig#framework";
+      switchflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild switch --flake ~/nixosConfig#framework";
       # Dev Environments
-      coding = "nix develop ~/nixos-config/dev#coding";
-      python = "nix develop ~/nixos-config/dev#python";
-      opencode = "nix develop ~/nixos-config/dev#opencode";
+      coding = "nix develop ~/nixosConfig/dev#coding";
+      python = "nix develop ~/nixosConfig/dev#python";
+      opencode = "nix develop ~/nixosConfig/dev#opencode";
     };
   
     oh-my-zsh = {
