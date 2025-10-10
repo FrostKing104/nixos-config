@@ -18,6 +18,7 @@
     networkmanagerapplet
     git
     syncthing
+    framework-tool
     git-credential-manager
     rofi
     brightnessctl

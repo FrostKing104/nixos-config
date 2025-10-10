@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the
 # configuration.nix(5) man page and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 
 let
@@ -25,7 +25,7 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 5;
 
-  networking.hostName = "desktop"; # Define your hostname.
+  networking.hostName = "framework"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -41,6 +41,12 @@ in {
   # GTK Configuration
   programs.dconf.enable = true;
   services.dbus.enable = true;
+ 
+  # Enable fwupd for firmware updates
+  services.fwupd.enable = true;
+
+  # Enable iio sensor detection
+  hardware.sensor.iio.enable = lib.mkDefault true;
 
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
@@ -230,24 +236,6 @@ in {
  
   # Disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # File System Declaration
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/c1dac6ea-8f0e-4759-873d-28de63e7e6d6";
-      fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/268D-58F3";
-      fsType = "vfat";
-    };
-
-    "/games" = {
-      device = "/dev/disk/by-uuid/460e9a24-b39c-4fce-859d-8ebf25e9f941";
-      fsType = "ext4";
-    };
-  };
 
   # FCITX5
   i18n.inputMethod = {

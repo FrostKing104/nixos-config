@@ -24,7 +24,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
   in {
-    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
