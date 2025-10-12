@@ -94,6 +94,7 @@
     opentabletdriver
     commitizen
     git-lfs
+    wvkbd
   ];
 
   services.hardware.openrgb.enable = true;
