@@ -95,6 +95,7 @@
     commitizen
     git-lfs
     wvkbd
+    lazygit
   ];
 
   services.hardware.openrgb.enable = true;
