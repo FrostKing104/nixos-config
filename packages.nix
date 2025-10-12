@@ -93,6 +93,7 @@
     opentabletdriver
     commitizen
     git-lfs
+    lazygit
   ];
 
   services.hardware.openrgb.enable = true;
