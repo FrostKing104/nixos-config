@@ -13,6 +13,11 @@
     '';
   };
 
+  # Enable the MPRIS bridge for the MPD service
+  services.mpd-mpris = {
+    enable = true;
+  };
+
   # rmpc configuration
   programs.rmpc = {
     enable = true;
