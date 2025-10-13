@@ -32,5 +32,6 @@
     mpc
     yt-dlp
     ffmpeg
+    bluetuith
   ];
 }
