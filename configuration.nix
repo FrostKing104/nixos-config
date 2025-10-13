@@ -42,6 +42,9 @@ in {
   programs.dconf.enable = true;
   services.dbus.enable = true;
 
+  # Playerctl
+  services.playerctld.enable = true;
+
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
 
