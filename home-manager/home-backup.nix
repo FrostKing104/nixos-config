@@ -1,18 +1,18 @@
 { config, pkgs, inputs, ... }:
 
-
 {
   # IMPORTS
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
+    # REMOVED: inputs.catppuccin.homeModules.catppuccin - this is handled in catppuccin.nix
     ./wofi.nix
     ./home-modules/packages.nix
-    ./home-modules/zsh.nix    
     ./home-modules/fcitx5.nix
-    ./home-modules/webApps.nix
-    ./home-modules/nixvim/nixvim.nix
-    ./home-modules/mpd.nix
     ./home-modules/catppuccin.nix
+    ./home-modules/desktopShortcuts.nix
+    ./home-modules/zsh.nix    
+#    ./home-modules/hyprlandPlugins.nix
+    ./home-modules/nixvim/nixvim.nix
+    ./home-modules/mpd-rmpc/mpd-rmpc.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -30,22 +30,22 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
-  # GTK Configuration
-  gtk = {
-    enable = true;
-    font = {
-      name = "Ubuntu";
-      size = 11;
-    };
-    theme = {
-      package = pkgs.gnome-themes-extra;
-      name = "Adwaita";
-    };
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-  };
+  # GTK Configuration (back to manual since Catppuccin GTK is removed)
+ # gtk = {
+ #   enable = true;
+ #   font = {
+ #     name = "Ubuntu";
+ #     size = 11;
+ #   };
+ #   theme = {
+ #     package = pkgs.gnome-themes-extra;
+ #     name = "Adwaita-dark";  # Use dark variant
+ #   };
+ #   iconTheme = {
+ #     package = pkgs.adwaita-icon-theme;
+ #     name = "Adwaita";
+ #   };
+ # };
 
   # DConf settings for GTK font rendering
   dconf.settings = {
@@ -72,9 +72,9 @@
 
   # Environment variables for better GTK rendering
   home.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
+    #GTK_THEME = "Adwaita:dark";  # Back to manual GTK theme
     GDK_SCALE = "1";
-    GDK_DPI_SCALE = "1";
+    #GDK_DPI_SCALE = "1";
     # Make Firefox use Wayland when available, as opposed to XWayland
     MOZ_ENABLE_WAYLAND = "1";
   };
@@ -87,4 +87,3 @@
     recursive = true;
   };
 }
-
