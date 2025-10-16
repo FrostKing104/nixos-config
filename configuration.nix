@@ -48,6 +48,9 @@ in {
   # Enable iio sensor detection
   hardware.sensor.iio.enable = lib.mkDefault true;
 
+  # Playerctl
+  services.playerctld.enable = true;
+
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
 
