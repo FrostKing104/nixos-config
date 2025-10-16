@@ -86,4 +86,29 @@
     source = ./Dracula-cursors;
     recursive = true;
   };
+  # System lock & sleep on lid shut
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+      listener = [
+        # Suspend after 20 seconds of inactivity
+        {
+          timeout = 20;
+          on-timeout = "systemctl suspend";
+        }
+        # You could add other listeners here, for example:
+        # {
+        #   timeout = 300; # 5 minutes
+        #   on-timeout = "brightnessctl set 10%";
+        #   on-resume = "brightnessctl set 100%";
+        # }
+      ];
+    };
+  };
 }
