@@ -54,11 +54,7 @@ in {
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
 
-  # --- Have logind send 'lock' signal on lid shut --- #
-
-  services.logind.lidSwitch = "lock";
-
-  # --- Tailscale --- #
+  # Tailscale
 
   # 1. Enable Tailscale service
   services.tailscale.enable = true;
