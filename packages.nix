@@ -107,6 +107,7 @@
       #"app.zen_browser.zen"    
       "net.ankiweb.Anki"
       "net.waterfox.waterfox"
+      "org.libretro.RetroArch"
     ];
     uninstallUnused = true;
   };
