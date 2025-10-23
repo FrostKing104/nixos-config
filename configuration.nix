@@ -192,7 +192,7 @@ in {
   };
 
   # Specify Intel
-  services.xserver.videoDrivers = [ "intel" ];
+#  services.xserver.videoDrivers = [ "intel" ];
 
   # Enable experimental features
   nix.settings = {
