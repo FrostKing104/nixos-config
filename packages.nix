@@ -10,6 +10,9 @@
   programs.zsh.enable = true;
   programs.steam.enable = true; 
 
+  # Install Waydroid
+  virtualisation.waydroid.enable = true;
+
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     kitty
