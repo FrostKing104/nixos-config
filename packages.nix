@@ -22,7 +22,6 @@
     git-credential-manager
     rofi
     brightnessctl
-    hyprland
     zsh
     tree
     wofi
@@ -96,6 +95,9 @@
     git-lfs
     wvkbd
     lazygit
+    
+    # Hyprland Plugins
+    hyprlandPlugins.hyprgrass
   ];
 
   services.hardware.openrgb.enable = true;

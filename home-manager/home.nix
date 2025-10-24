@@ -10,7 +10,7 @@
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
     ./home-modules/zsh.nix    
-#    ./home-modules/hyprlandPlugins.nix
+    #./home-modules/hyprland.nix
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix
   ];

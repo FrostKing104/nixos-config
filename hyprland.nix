@@ -1,13 +1,13 @@
-# ~/nixos-config/hyprland.conf
 { config, pkgs, ... }:
 
 {
-  # Enable Hyprland
+  # Enable Hyprland system-wide
   programs.hyprland = {
     enable = true;
-  };
-  
-  # Use hyprlock
-  security.pam.services.hyprlock = {};
 
+  };
+
+  # PAM integration for hyprlock
+  security.pam.services.hyprlock = {};
 }
+
