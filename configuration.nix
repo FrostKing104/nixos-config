@@ -41,7 +41,7 @@ in {
   # GTK Configuration
   programs.dconf.enable = true;
   services.dbus.enable = true;
- 
+  
   # Enable fwupd for firmware updates
   services.fwupd.enable = true;
 
@@ -53,6 +53,30 @@ in {
 
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
+
+  # Configure waydroid-helper
+  # This is the corrected block
+  environment.systemPackages = [ pkgs.waydroid-helper ];
+  systemd = {
+    # 1. Fixes the SYSTEM service (waydroid-mount.service)
+    services.waydroid-mount = {
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        # This is the fix: Replaces '/usr/bin/waydroid-helper'
+        ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --start-mount";
+      };
+    };
+
+    # 2. Fixes and enables the USER service (waydroid-monitor.service)
+    user.services.waydroid-monitor = {
+      wantedBy = [ "graphical-session.target" ];
+      serviceConfig = {
+        # This is the same fix for the user service
+        ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --monitor";
+      };
+    };
+  };
+
 
   # Tailscale
 
@@ -203,7 +227,7 @@ in {
   # Enable experimental features
   nix.settings = {
     extra-experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://ezkea.cachix.org" ];
+    substituters = [ "https.ezkea.cachix.org" ];
     trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
   };
 
@@ -218,7 +242,7 @@ in {
 
   # An Anime Game Launcher:
   programs.anime-game-launcher.enable = true;
-  programs.anime-games-launcher.enable = true;
+  # programs.anime-games-launcher.enable = true; # <-- This was the typo
   programs.honkers-railway-launcher.enable = false;
   programs.honkers-launcher.enable = false;
   programs.wavey-launcher.enable = false;
@@ -234,18 +258,19 @@ in {
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4713 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
- 
-  # Disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true; 
+
+  # --- Waydroid Fix ---
+  networking.firewall.extraForwardRules = "accept"; 
+  networking.firewall.allowedTCPPorts = [ 4713 53 ]; 
+  networking.firewall.allowedUDPPorts = [ 53 67 ];
 
   # FCITX5
   i18n.inputMethod = {
     type = "fcitx5";
     enable = true;
     fcitx5.addons = with pkgs; [
-      fcitx5-mozc        # This should be here
+      fcitx5-mozc     # This should be here
       fcitx5-gtk
       fcitx5-tokyonight
       fcitx5-configtool
