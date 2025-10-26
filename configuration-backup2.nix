@@ -115,8 +115,7 @@ in {
         {
           type = "hwmon";
           query = "/sys/devices/platform/nct6775.656"; # nct6798 chip
-          # FIXED: Use index 2 (temp2_input / CPUTIN)
-          indices = [ 2 ]; 
+          indices = [ 1 ]; # Assumes temp1_input is motherboard sensor
         }
       ];
 
@@ -126,24 +125,24 @@ in {
         {
           type = "hwmon";
           query = "/sys/devices/platform/nct6775.656"; # Fans are on the mobo chip
-          # FIXED: Use index 2 (pwm2) to control fan2
-          indices = [ 2 ]; 
+          # This assumes your CPU_FAN is on pwm1.
+          # If fan control doesn't work, change this to [ 2 ].
+          indices = [ 1 ]; 
         }
       ];
 
       # Define the fan curve (Complex Mode)
       # The sensor order matches the `sensors` block above: [CPU, GPU, Motherboard]
       levels = [
-      # Fan PWM, [CPU Temp Range], [GPU Temp Range], [Mobo Temp Range]
-      # Off/Idle (PWM 0/255 -> 0%)
+        # Off/Idle (PWM 0/255 -> 0%)
         { speed = 0; upper_limit = [ 55 58 50 ]; }
-      # Low Speed (PWM 53/255 -> ~20%)
+        # Low Speed (PWM 53/255 -> ~20%)
         { speed = 53; lower_limit = [ 53 56 48 ]; upper_limit = [ 65 68 55 ]; }
-      # Medium Speed (PWM 128/255 -> 50%)
+        # Medium Speed (PWM 128/255 -> 50%)
         { speed = 128; lower_limit = [ 63 66 53 ]; upper_limit = [ 75 78 60 ]; }
-      # High Speed (PWM 191/255 -> 75%)
+        # High Speed (PWM 191/255 -> 75%)
         { speed = 191; lower_limit = [ 73 76 58 ]; upper_limit = [ 85 88 65 ]; }
-      # Full Speed (PWM 255/255 -> 100%)
+        # Full Speed (PWM 255/255 -> 100%)
         { speed = 255; lower_limit = [ 83 86 63 ]; upper_limit = [ 255 255 255 ]; }
       ];
     };

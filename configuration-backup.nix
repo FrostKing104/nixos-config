@@ -92,63 +92,6 @@ in {
   # Enable Fstrim
   services.fstrim.enable = true;
 
-  # --- Fan Control Configuration --- #
-
-  services.thinkfan = {
-    enable = true;
-    settings = {
-      # Define the temperature sensors
-      sensors = [
-        # Sensor 0: CPU Temperature (Ryzen 5 3600)
-        {
-          type = "hwmon";
-          query = "/sys/devices/pci0000:00/0000:00:18.3"; # k10temp
-          indices = [ 1 ]; # Use temp1_input (Tctl/Tdie)
-        }
-        # Sensor 1: GPU Temperature (Radeon RX 580)
-        {
-          type = "hwmon";
-          query = "/sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0"; # amdgpu
-          indices = [ 1 ]; # Use temp1_input (Edge)
-        }
-        # Sensor 2: Motherboard Temperature (ASRock B450M)
-        {
-          type = "hwmon";
-          query = "/sys/devices/platform/nct6775.656"; # nct6798 chip
-          # FIXED: Use index 2 (temp2_input / CPUTIN)
-          indices = [ 2 ]; 
-        }
-      ];
-
-      # Define the fan controllers
-      fans = [
-        # CPU Fan Controller
-        {
-          type = "hwmon";
-          query = "/sys/devices/platform/nct6775.656"; # Fans are on the mobo chip
-          # FIXED: Use index 2 (pwm2) to control fan2
-          indices = [ 2 ]; 
-        }
-      ];
-
-      # Define the fan curve (Complex Mode)
-      # The sensor order matches the `sensors` block above: [CPU, GPU, Motherboard]
-      levels = [
-      # Fan PWM, [CPU Temp Range], [GPU Temp Range], [Mobo Temp Range]
-      # Off/Idle (PWM 0/255 -> 0%)
-        { speed = 0; upper_limit = [ 55 58 50 ]; }
-      # Low Speed (PWM 53/255 -> ~20%)
-        { speed = 53; lower_limit = [ 53 56 48 ]; upper_limit = [ 65 68 55 ]; }
-      # Medium Speed (PWM 128/255 -> 50%)
-        { speed = 128; lower_limit = [ 63 66 53 ]; upper_limit = [ 75 78 60 ]; }
-      # High Speed (PWM 191/255 -> 75%)
-        { speed = 191; lower_limit = [ 73 76 58 ]; upper_limit = [ 85 88 65 ]; }
-      # Full Speed (PWM 255/255 -> 100%)
-        { speed = 255; lower_limit = [ 83 86 63 ]; upper_limit = [ 255 255 255 ]; }
-      ];
-    };
-  };
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 

@@ -33,5 +33,6 @@
     yt-dlp
     ffmpeg
     bluetuith
+    stress-ng
   ];
 }

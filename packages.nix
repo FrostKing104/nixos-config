@@ -94,6 +94,8 @@
     commitizen
     git-lfs
     lazygit
+    thinkfan
+    lact
   ];
 
   services.hardware.openrgb.enable = true;
