@@ -8,12 +8,10 @@
   # Enable programs
   programs.firefox.enable = true; 
   programs.zsh.enable = true;
-  programs.steam.enable = true; 
+  programs.steam.enable = true;
 
   # Install Waydroid
-  
   virtualisation.waydroid.enable = true;
-
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -103,6 +101,7 @@
     wvkbd
     lazygit
     
+    gsettings-desktop-schemas
     # Hyprland Plugins
     hyprlandPlugins.hyprgrass
   ];
@@ -115,7 +114,6 @@
     packages = [
       #"app.zen_browser.zen"    
       "net.ankiweb.Anki"
-      "net.waterfox.waterfox"
       "org.libretro.RetroArch"
     ];
     uninstallUnused = true;

@@ -33,5 +33,6 @@
     yt-dlp
     ffmpeg
     moonlight-qt
+    readest
   ];
 }
