@@ -51,7 +51,7 @@ in
     "obsidian-main" = {
       name = "Obsidian Main Vault";
       comment = "Open the main Obsidian vault";
-      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/45be03fe07ce1733";
+      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/b179f57fa349d87e";
       icon = "obsidian";
       type = "Application";
       categories = [ "Office" "Utility" ];
@@ -60,7 +60,7 @@ in
     "obsidian-college" = {
       name = "Obsidian College Vault";
       comment = "Open the college Obsidian vault";
-      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/bb1b079b93a59a4e";
+      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/418c20a1afb6550e";
       icon = "obsidian";
       type = "Application";
       categories = [ "Office" "Utility" ];
@@ -69,7 +69,7 @@ in
     "obsidian-writing" = {
       name = "Obsidian Writing Vault";
       comment = "Open the writing Obsidian vault";
-      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/5088080f897a87ad";
+      exec = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/1e021ee8aa305e13";
       icon = "obsidian";
       type = "Application";
       categories = [ "Office" "Utility" ];
