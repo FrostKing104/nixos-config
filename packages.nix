@@ -98,7 +98,14 @@
     lact
   ];
 
-  services.hardware.openrgb.enable = true;
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb; 
+    motherboard = "amd"; 
+    server = {
+      port = 6742;      
+    };
+  };
 
 
   services.flatpak = {
