@@ -20,12 +20,6 @@
       insensitive = true;
       prompt = "";              # Explicitly set to empty string
       columns = 2;
-
-      # Vim Keybindings (Wofi uses these names in the config file)
-      key_up = "k";
-      key_down = "j";
-      key_left = "h";
-      key_right = "l";
     };
 
     # Wofi Styling (maps to ~/.config/wofi/style.css)
