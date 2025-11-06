@@ -34,5 +34,6 @@
     ffmpeg
     bluetuith
     stress-ng
+    zotero
   ];
 }
