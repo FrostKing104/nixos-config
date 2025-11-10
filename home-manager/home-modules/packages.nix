@@ -35,5 +35,6 @@
     bluetuith
     stress-ng
     zotero
+    prismlauncher
   ];
 }
