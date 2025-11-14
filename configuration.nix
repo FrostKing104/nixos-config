@@ -49,6 +49,13 @@ in {
   # Playerctl
   services.playerctld.enable = true;
 
+  # OpenSSH
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true; 
+    openFirewall = false;
+  };
+  
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
 
@@ -291,7 +298,7 @@ in {
   # Open ports in the firewall.
   networking.firewall = {
     allowedTCPPorts = [ 4713 8080 8000 ];
-    trustedInterfaces = [ "docker0" ];
+    trustedInterfaces = [ "docker0" "tailscale0" ];
   };
   # networking.firewall.allowedUDPPorts = [ ... ];
  
