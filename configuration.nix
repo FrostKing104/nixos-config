@@ -18,6 +18,7 @@ in {
       ./packages.nix
       ./hyprland.nix
       aagl.module
+      ./ai.nix
     ];
 
   # Bootloader.
@@ -288,7 +289,10 @@ in {
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4713 ];
+  networking.firewall = {
+    allowedTCPPorts = [ 4713 8080 8000 ];
+    trustedInterfaces = [ "docker0" ];
+  };
   # networking.firewall.allowedUDPPorts = [ ... ];
  
   # Disable the firewall altogether.
