@@ -11,8 +11,8 @@
       hm = "nvim ~/nixos-config/home-manager/home.nix";
       hmpackages = "nvim ~/nixos-config/home-manager/home-modules/packages.nix";
       # Rebuilding
-      testflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild test --flake ~/nixos-config";
-      switchflake = "rm /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild switch --flake ~/nixos-config";
+      testflake = "rm -f /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild test --flake ~/nixos-config";
+      switchflake = "rm -f /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild switch --flake ~/nixos-config";
       # Dev Environments
       coding = "nix develop ~/nixos-config/dev#coding";
       python = "nix develop ~/nixos-config/dev#python";
