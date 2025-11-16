@@ -93,8 +93,8 @@ in {
   # --- Garbage Collection (system configurations older than 30 days will be deleted weekly) --- #
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+    dates = "daily";
+    options = "--delete-older-than 20d";
   };
 
   # Enable Fstrim
