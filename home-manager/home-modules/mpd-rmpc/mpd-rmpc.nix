@@ -4,7 +4,7 @@
   # User-level MPD configuration (runs as your user, not system-wide)
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/anklus/Music/Music";
+    musicDirectory = "/home/anklus/Music/musicSync/";
     extraConfig = ''
       audio_output {
         type "pipewire"
