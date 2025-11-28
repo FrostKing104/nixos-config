@@ -113,11 +113,11 @@
               id = "NotificationHistory";
               showUnreadBadge = true;
             }
-            {
-              displayMode = "onhover";
-              id = "Battery";
-              warningThreshold = 30;
-            }
+            #{
+            #  displayMode = "onhover";
+            #  id = "Battery";
+            #  warningThreshold = 30;
+            #}
             {
               displayMode = "alwaysShow";
               id = "Volume";
@@ -212,19 +212,13 @@
             {
               id = "Bluetooth";
             }
-            {
-              id = "NightLight";
-            }
+	    {
+	      id = "PowerProfile";
+	    }
           ];
           right = [
             {
               id = "Notifications";
-            }
-            {
-              id = "PowerProfile";
-            }
-            {
-              id = "KeepAwake";
             }
             {
               id = "ScreenRecorder";
