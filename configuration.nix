@@ -280,11 +280,11 @@ in {
 
   # An Anime Game Launcher:
   programs.anime-game-launcher.enable = true;
-  programs.anime-games-launcher.enable = true;
+  programs.anime-games-launcher.enable = false;
   programs.honkers-railway-launcher.enable = false;
   programs.honkers-launcher.enable = false;
   programs.wavey-launcher.enable = false;
-  programs.sleepy-launcher.enable = false;
+  programs.sleepy-launcher.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
