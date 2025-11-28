@@ -1,5 +1,5 @@
 # ~/nixos-config/packages.nix
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Allow unfree packages
@@ -96,6 +96,8 @@
     lazygit
     thinkfan
     lact
+#    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   services.hardware.openrgb = {
