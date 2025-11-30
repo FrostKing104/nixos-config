@@ -96,8 +96,10 @@
     lazygit
     thinkfan
     lact
+# Use for default quickshell
 #    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    nextcloud-client
   ];
 
   services.hardware.openrgb = {

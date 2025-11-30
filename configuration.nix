@@ -18,6 +18,7 @@ in {
       ./hyprland.nix
       aagl.module
       ./ai.nix
+      ./nextcloud.nix
     ];
 
   # ----- TEMP ----- #
