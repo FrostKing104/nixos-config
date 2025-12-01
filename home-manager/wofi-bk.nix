@@ -63,7 +63,7 @@
         margin: 0px;
         padding: 10px;
         border: 0.16em solid @lavender;
-        border-radius: 2px;
+        border-radius: 0.1em;
         background-color: @base;
         /* Animation properties are sometimes problematic in CSS embedded in NixOS,
            but including them for completeness. */
@@ -86,7 +86,6 @@
         padding: 10px;
         border: none;
         background-color: @base;
-        border-radius: 2px;
         animation: fadeIn 0.1s ease-in-out both;
       }
 
@@ -106,7 +105,6 @@
         padding: 10px;
         border: none;
         background-color: @base;
-        border-radius: 2px;
       }
 
       /* Scroll */
@@ -115,7 +113,6 @@
         padding: 10px;
         border: none;
         background-color: @base;
-        border-radius: 2px;
       }
 
       /* Input */
@@ -123,7 +120,7 @@
         margin: 5px 20px;
         padding: 10px;
         border: none;
-        border-radius: 2px;
+        border-radius: 0.1em;
         color: @text;
         background-color: @base;
         animation: fadeIn 0.1s ease-in-out both;
@@ -145,13 +142,11 @@
         margin: 5px;
         border: none;
         color: @text;
-        border-radius: 2px;
         animation: fadeIn 0.1s ease-in-out both;
       }
 
       #entry {
         background-color: @base;
-        border-radius: 2px;
       }
 
       #entry arrow {
@@ -161,9 +156,7 @@
 
       /* Selected Entry */
       #entry:selected {
-        background-color: #313244;
-        border: none;
-        border-radius: 2px;
+        border: 0.11em solid @lavender;
       }
 
       #entry:selected #text {
@@ -172,9 +165,7 @@
 
       #entry:drop(active) {
         background-color: @lavender!important;
-        border-radius: 2px;
       }
     '';
   };
 }
-
