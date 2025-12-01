@@ -6,10 +6,10 @@
 
 let
   unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-  aagl = import (builtins.fetchTarball {
-    url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.05.tar.gz";
-    sha256 = "0jdrfq8z8a68xfpcrqasgqlbn0vr292ip2fn1mpn9sb831lbviph";
-  });
+#  aagl = import (builtins.fetchTarball {
+#    url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.05.tar.gz";
+#    sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
+ # });
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -17,7 +17,7 @@ in {
       inputs.home-manager.nixosModules.default
       ./packages.nix
       ./hyprland.nix
-      aagl.module
+ #     aagl.module
     ];
 
   # Bootloader.
@@ -241,12 +241,12 @@ in {
   };
 
   # An Anime Game Launcher:
-  programs.anime-game-launcher.enable = true;
-  # programs.anime-games-launcher.enable = true; # <-- This was the typo
-  programs.honkers-railway-launcher.enable = false;
-  programs.honkers-launcher.enable = false;
-  programs.wavey-launcher.enable = false;
-  programs.sleepy-launcher.enable = false;
+  #programs.anime-game-launcher.enable = true;
+  #programs.anime-games-launcher.enable = true;
+  #programs.honkers-railway-launcher.enable = false;
+  #programs.honkers-launcher.enable = false;
+  #programs.wavey-launcher.enable = false;
+  #programs.sleepy-launcher.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
