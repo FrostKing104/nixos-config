@@ -36,5 +36,6 @@
     stress-ng
     zotero
     prismlauncher
+    grimblast
   ];
 }

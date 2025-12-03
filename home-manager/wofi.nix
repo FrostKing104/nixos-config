@@ -20,6 +20,8 @@
       insensitive = true;
       prompt = "";              # Explicitly set to empty string
       columns = 2;
+      location = "top";
+      y_offset = 100;
     };
 
     # Wofi Styling (maps to ~/.config/wofi/style.css)

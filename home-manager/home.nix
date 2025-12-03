@@ -30,7 +30,7 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
-  # GTK Configuration (back to manual since Catppuccin GTK is removed)
+ # GTK Configuration 
  # gtk = {
  #   enable = true;
  #   font = {
