@@ -26,7 +26,7 @@
         cavaFrameRate = 30;
         externalMixer = "pwvucontrol || pavucontrol";
         mprisBlacklist = [ ];
-        preferredPlayer = "mpd";
+        preferredPlayer = "Firefox";
         visualizerQuality = "low";
         visualizerType = "linear";
         volumeOverdrive = false;
