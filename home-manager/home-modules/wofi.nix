@@ -1,31 +1,27 @@
 { config, pkgs, ... }:
 
 {
-  # Since you are running NixOS with Hyprland (based on our saved info),
-  # this wofi configuration is highly relevant for your setup.
   programs.wofi = {
     enable = true;
 
     # Wofi Configuration (maps to ~/.config/wofi/config)
     settings = {
-      # From your wofi config
       show = "drun";
       width = 750;
       height = 400;
-      always_parse_args = true; # Note: not always needed, but included
-      show_all = false;         # Note: not always needed, but included
+      always_parse_args = true;
+      show_all = false;
       term = "kitty";
       hide_scroll = true;
       print_command = true;
       insensitive = true;
-      prompt = "";              # Explicitly set to empty string
+      prompt = "";
       columns = 2;
       location = "top";
       y_offset = 100;
     };
 
     # Wofi Styling (maps to ~/.config/wofi/style.css)
-    # The CSS is wrapped in a multi-line string.
     style = ''
       /* Color definitions from your style.css */
       @define-color rosewater #f5e0dc;
@@ -67,8 +63,6 @@
         border: 0.16em solid @lavender;
         border-radius: 2px;
         background-color: @base;
-        /* Animation properties are sometimes problematic in CSS embedded in NixOS,
-           but including them for completeness. */
         animation: slideIn 0.1s ease-in-out both;
       }
 
@@ -120,15 +114,21 @@
         border-radius: 2px;
       }
 
-      /* Input */
+      /* Input - MODIFIED */
       #input {
         margin: 5px 20px;
         padding: 10px;
         border: none;
         border-radius: 2px;
         color: @text;
-        background-color: @base;
+        background-color: @surface0; 
         animation: fadeIn 0.1s ease-in-out both;
+      }
+      
+      /* ADDED: Remove the default GTK focus border/shadow when the input is active */
+      #input:focus {
+        border: none;
+        box-shadow: none;
       }
 
       #input image {
@@ -137,9 +137,8 @@
       }
 
       #input * {
-        /* You had !important, which is supported in CSS but sometimes
-           can be tricky. Kept for fidelity. */
-        outline: 4px solid @red!important;
+        /* Removed the red outline in the previous turn */
+        outline: none;
       }
 
       /* Text */
@@ -163,7 +162,7 @@
 
       /* Selected Entry */
       #entry:selected {
-        background-color: #313244;
+        background-color: @surface0; 
         border: none;
         border-radius: 2px;
       }
@@ -179,4 +178,3 @@
     '';
   };
 }
-

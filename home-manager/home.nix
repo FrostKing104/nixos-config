@@ -4,7 +4,7 @@
   # IMPORTS
   imports = [
     # REMOVED: inputs.catppuccin.homeModules.catppuccin - this is handled in catppuccin.nix
-    ./wofi.nix
+    ./home-modules/wofi.nix
     ./home-modules/packages.nix
     ./home-modules/fcitx5.nix
     ./home-modules/catppuccin.nix
