@@ -104,7 +104,7 @@
             {
               blacklist = [ ];
               colorizeIcons = true;
-              drawerEnabled = true;
+              drawerEnabled = false;
               id = "Tray";
               pinned = [ ];
             }
