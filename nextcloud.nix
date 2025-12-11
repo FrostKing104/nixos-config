@@ -36,6 +36,7 @@
       settings = {
         trusted_domains = [ "100.98.223.8" ];
         overwriteprotocol = "http";
+      };
     };
 
     # Disable OnlyOffice for now to keep things simple
