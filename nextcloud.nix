@@ -29,12 +29,13 @@
         # leave onlyoffice out until we care about it
       };
       config = {
-        overwriteProtocol = "http";
         dbtype = "pgsql";
         adminuser = "anklus";
         adminpassFile = "/etc/nextcloud-admin-pass";
-        extraTrustedDomains = [ "100.98.223.8" ];
       };
+      settings = {
+        trusted_domains = [ "100.98.223.8" ];
+        overwriteprotocol = "http";
     };
 
     # Disable OnlyOffice for now to keep things simple
