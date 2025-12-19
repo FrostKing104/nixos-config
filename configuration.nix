@@ -5,10 +5,10 @@
 
 
 let
-  aagl = import (builtins.fetchTarball {
-    url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.05.tar.gz";
-    sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
-  });
+#  aagl = import (builtins.fetchTarball {
+#    url = "github:ezYakaPaka/aagl-gtk-on-nix/release-25.11.tar.gz";
+#    sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
+#  });
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -16,7 +16,7 @@ in {
       inputs.home-manager.nixosModules.default
       ./packages.nix
       ./hyprland.nix
-      aagl.module
+#      aagl.module
       ./ai.nix
       ./nextcloud.nix
     ];
@@ -180,14 +180,14 @@ in {
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    noto-fonts-emoji
     nerd-fonts.jetbrains-mono
+    noto-fonts-color-emoji
     fira-code
     dejavu_fonts
     font-awesome
     liberation_ttf
-    ubuntu_font_family
     jetbrains-mono
+    ubuntu-classic
     source-han-sans
     source-han-serif
     vista-fonts
@@ -282,12 +282,12 @@ in {
   };
 
   # An Anime Game Launcher:
-  programs.anime-game-launcher.enable = true;
-  programs.anime-games-launcher.enable = false;
-  programs.honkers-railway-launcher.enable = false;
-  programs.honkers-launcher.enable = false;
-  programs.wavey-launcher.enable = false;
-  programs.sleepy-launcher.enable = true;
+  #programs.anime-game-launcher.enable = true;
+  #programs.anime-games-launcher.enable = false;
+  #programs.honkers-railway-launcher.enable = false;
+  #programs.honkers-launcher.enable = false;
+  #programs.wavey-launcher.enable = false;
+  #programs.sleepy-launcher.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -334,7 +334,7 @@ in {
       fcitx5-mozc        
       fcitx5-gtk
       fcitx5-tokyonight
-      fcitx5-configtool
+      qt6Packages.fcitx5-configtool
     ];
   };
 

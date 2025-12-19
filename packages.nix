@@ -60,7 +60,6 @@
     zsh-powerlevel10k
     fzf-zsh
     zsh-autosuggestions
-    zsh-git-prompt
     zsh-syntax-highlighting
     zsh-history-substring-search
     vesktop
