@@ -7,7 +7,7 @@
   programs.noctalia-shell = {
     enable = true;
     settings = {
-      settingsVersion = 31;
+      settingsVersion = 25;
       
       appLauncher = {
         customLaunchPrefix = "";
@@ -16,7 +16,6 @@
         enableClipboardHistory = false;
         pinnedExecs = [ ];
         position = "center";
-        showCategories = true;
         sortByMostUsed = true;
         terminalCommand = "kitty -e";
         useApp2Unit = false;
@@ -35,6 +34,7 @@
       };
 
       bar = {
+        backgroundOpacity = 1;
         capsuleOpacity = 1;
         density = "default";
         exclusive = true;
@@ -45,20 +45,14 @@
         outerCorners = false;
         position = "top";
         showCapsule = false;
-        showOutline = false;
-        transparent = false;
         widgets = {
           center = [
             {
               characterCount = 2;
-              colorizeIcons = false;
-              enableScrollWheel = true;
               followFocusedScreen = false;
               hideUnoccupied = false;
               id = "Workspace";
               labelMode = "index";
-              showApplications = false;
-              showLabelsOnlyWhenOccupied = true;
             }
             {
               hideMode = "hidden";
@@ -77,9 +71,7 @@
           left = [
             {
               colorizeDistroLogo = true;
-              colorizeSystemIcon = "primary";
               customIconPath = "";
-              enableColorization = true;
               icon = "noctalia";
               id = "ControlCenter";
               useDistroLogo = true;
@@ -90,7 +82,6 @@
               showCpuTemp = true;
               showCpuUsage = true;
               showDiskUsage = false;
-              showGpuTemp = false;
               showMemoryAsPercent = true;
               showMemoryUsage = true;
               showNetworkStats = false;
@@ -114,7 +105,6 @@
               blacklist = [ ];
               colorizeIcons = true;
               drawerEnabled = false;
-              hidePassive = false;
               id = "Tray";
               pinned = [ ];
             }
@@ -175,6 +165,10 @@
         ];
       };
 
+      changelog = {
+        lastSeenVersion = "";
+      };
+
       colorSchemes = {
         darkMode = true;
         generateTemplatesForPredefined = true;
@@ -183,7 +177,7 @@
         matugenSchemeType = "scheme-fruit-salad";
         predefinedScheme = "Catppuccin";
         schedulingMode = "off";
-        useWallpaperColors = false;
+        useWallpaperColors = true;
       };
 
       controlCenter = {
@@ -218,9 +212,9 @@
             {
               id = "Bluetooth";
             }
-            {
-              id = "PowerProfile";
-            }
+	    {
+	      id = "PowerProfile";
+	    }
           ];
           right = [
             {
@@ -236,26 +230,16 @@
         };
       };
 
-      desktopWidgets = {
-        editMode = false;
-        enabled = false;
-        gridSnap = false;
-        monitorWidgets = [ ];
-      };
-
       dock = {
-        animationSpeed = 1;
         backgroundOpacity = 1;
         colorizeIcons = false;
-        deadOpacity = 0.6;
         displayMode = "auto_hide";
         enabled = false;
         floatingRatio = 1;
-        inactiveIndicators = false;
         monitors = [ ];
         onlySameOutput = true;
         pinnedApps = [ ];
-        pinnedStatic = false;
+        radiusRatio = 0.1;
         size = 1;
       };
 
@@ -264,12 +248,10 @@
         animationDisabled = false;
         animationSpeed = 1;
         avatarImage = "/home/anklus/Pictures/profilePicture";
-        boxRadiusRatio = 1;
         compactLockScreen = true;
         dimmerOpacity = 0.25;
         enableShadows = false;
         forceBlackScreenCorners = false;
-        iRadiusRatio = 1;
         language = "";
         lockOnSuspend = true;
         radiusRatio = 0.25;
@@ -280,16 +262,11 @@
         shadowOffsetY = 3;
         showHibernateOnLockScreen = false;
         showScreenCorners = false;
-        showSessionButtonsOnLockScreen = true;
       };
 
       hooks = {
         darkModeChange = "";
         enabled = false;
-        performanceModeDisabled = "";
-        performanceModeEnabled = "";
-        screenLock = "";
-        screenUnlock = "";
         wallpaperChange = "";
       };
 
@@ -331,26 +308,13 @@
         normalUrgencyDuration = 8;
         overlayLayer = true;
         respectExpireTimeout = false;
-        sounds = {
-          criticalSoundFile = "";
-          enabled = true;
-          excludedApps = "discord,firefox,chrome,chromium,edge";
-          lowSoundFile = "";
-          normalSoundFile = "";
-          separateSounds = false;
-          volume = 0.5;
-        };
       };
 
       osd = {
         autoHideMs = 2000;
         backgroundOpacity = 1;
         enabled = true;
-        enabledTypes = [ 
-	  0
-	  1
-	  2
-	];
+        enabledTypes = [ ];
         location = "top_right";
         monitors = [ ];
         overlayLayer = true;
@@ -371,7 +335,6 @@
       sessionMenu = {
         countdownDuration = 10000;
         enableCountdown = true;
-        largeButtonsStyle = false;
         position = "center";
         powerOptions = [
           {
@@ -416,10 +379,6 @@
         diskCriticalThreshold = 90;
         diskPollingInterval = 3000;
         diskWarningThreshold = 80;
-        enableNvidiaGpu = false;
-        gpuCriticalThreshold = 90;
-        gpuPollingInterval = 3000;
-        gpuWarningThreshold = 80;
         memCriticalThreshold = 90;
         memPollingInterval = 3000;
         memWarningThreshold = 80;
@@ -436,7 +395,6 @@
         cava = false;
         code = false;
         discord = false;
-        emacs = false;
         enableUserTemplates = false;
         foot = false;
         fuzzel = false;
@@ -444,8 +402,6 @@
         gtk = false;
         kcolorscheme = false;
         kitty = false;
-        mango = false;
-        niri = false;
         pywalfox = false;
         qt = false;
         spicetify = false;
@@ -453,8 +409,6 @@
         vicinae = false;
         walker = false;
         wezterm = false;
-        yazi = false;
-        zed = false;
       };
 
       ui = {
@@ -464,18 +418,19 @@
         fontFixedScale = 1;
         panelBackgroundOpacity = 1;
         panelsAttachedToBar = true;
-        settingsPanelMode = "centered";
+        settingsPanelAttachToBar = false;
         tooltipsEnabled = true;
       };
 
       wallpaper = {
+        defaultWallpaper = "";
         directory = "/home/anklus/Pictures/wallpapers/";
         enableMultiMonitorDirectories = false;
         enabled = true;
         fillColor = "#000000";
         fillMode = "crop";
         hideWallpaperFilenames = false;
-        monitorDirectories = [ ];
+        monitors = [ ];
         overviewEnabled = false;
         panelPosition = "follow_bar";
         randomEnabled = true;
@@ -490,7 +445,6 @@
         wallhavenOrder = "desc";
         wallhavenPurity = "100";
         wallhavenQuery = "";
-        wallhavenRatios = "";
         wallhavenResolutionHeight = "";
         wallhavenResolutionMode = "atleast";
         wallhavenResolutionWidth = "";

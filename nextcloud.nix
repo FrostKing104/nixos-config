@@ -17,7 +17,7 @@
     nextcloud = {
       enable = true;
       hostName = "100.98.223.8";  # your Tailscale IP
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
       database.createLocally = true;
       configureRedis = true;
       maxUploadSize = "16G";
