@@ -17,8 +17,8 @@ in {
       ./packages.nix
       ./hyprland.nix
 #      aagl.module
-      ./ai.nix
-      ./nextcloud.nix
+      ./selfHosting/ai.nix
+      ./selfHosting/nextcloud.nix
     ];
 
   # ----- TEMP ----- #
