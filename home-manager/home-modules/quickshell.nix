@@ -73,6 +73,9 @@
               useFixedWidth = false;
               visualizerType = "mirrored";
             }
+	    {
+	      id = "Volume";
+	    }
           ];
           left = [
             {
@@ -108,9 +111,6 @@
           ];
           right = [
             {
-              id = "ScreenRecorder";
-            }
-            {
               blacklist = [ ];
               colorizeIcons = true;
               drawerEnabled = false;
@@ -118,6 +118,12 @@
               id = "Tray";
               pinned = [ ];
             }
+            {
+              id = "ScreenRecorder";
+            }
+	    {
+	      id = "WiFi";
+	    }
             {
               hideWhenZero = true;
               id = "NotificationHistory";
@@ -484,7 +490,7 @@
         setWallpaperOnAllMonitors = true;
         transitionDuration = 1500;
         transitionEdgeSmoothness = 0.05;
-        transitionType = "stripes";
+        transitionType = "random";
         useWallhaven = false;
         wallhavenCategories = "111";
         wallhavenOrder = "desc";
