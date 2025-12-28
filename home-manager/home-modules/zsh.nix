@@ -17,6 +17,9 @@
       coding = "nix develop ~/nixos-config/dev#coding";
       python = "nix develop ~/nixos-config/dev#python";
       opencode = "nix develop ~/nixos-config/dev#opencode";
+      # Scripts
+      fixtray = "source ~/nixos-config/scripts/fixTray.sh";
+      checkshelldiff = "source ~/nixos-config/scripts/checkShellDiff.sh";
     };
   
     oh-my-zsh = {
