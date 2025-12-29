@@ -14,9 +14,9 @@
       testflake = "rm -f /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild test --flake ~/nixos-config";
       switchflake = "rm -f /home/anklus/.config/fcitx5/profile.backup & sudo nixos-rebuild switch --flake ~/nixos-config";
       # Dev Environments
-      coding = "nix develop ~/nixos-config/dev#coding";
-      python = "nix develop ~/nixos-config/dev#python";
-      opencode = "nix develop ~/nixos-config/dev#opencode";
+      coding = "nix develop ~/shells#coding";
+      python = "nix develop ~/shells#python";
+      opencode = "nix develop ~/shells#opencode";
       # Scripts
       fixtray = "source ~/nixos-config/scripts/fixTray.sh";
       checkshelldiff = "source ~/nixos-config/scripts/checkShellDiff.sh";
