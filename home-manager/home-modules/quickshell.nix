@@ -56,7 +56,7 @@
               followFocusedScreen = false;
               hideUnoccupied = false;
               id = "Workspace";
-              labelMode = "index";
+              labelMode = "name";
               showApplications = false;
               showLabelsOnlyWhenOccupied = true;
             }
