@@ -1,27 +1,30 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the
 # configuration.nix(5) man page and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 
 let
+
 #  aagl = import (builtins.fetchTarball {
 #    url = "github:ezYakaPaka/aagl-gtk-on-nix/release-25.11.tar.gz";
 #    sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
 #  });
+
 in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./packages.nix
-      ./hyprland.nix
+      ./hyprland.nix 
+      ./sddm.nix
 #      aagl.module
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
     ];
 
-  # ----- TEMP ----- #
+  # Shell #
   services.noctalia-shell.enable = true;
 
   # Bootloader.
@@ -212,12 +215,8 @@ in {
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+    
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "catppuccin-mocha_mauve";
-  
   services.desktopManager.plasma6.enable = true;
 
   # Enable OpenTabletDriver for pen tablets

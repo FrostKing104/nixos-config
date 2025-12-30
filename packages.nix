@@ -101,6 +101,7 @@
     nextcloud-client
     snixembed
     heroic
+    sddm-astronaut
   ];
 
   services.hardware.openrgb = {
