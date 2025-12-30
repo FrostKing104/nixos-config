@@ -122,6 +122,9 @@
               id = "ScreenRecorder";
             }
 	    {
+	      id = "Bluetooth";
+	    }
+	    {
 	      id = "WiFi";
 	    }
             {
