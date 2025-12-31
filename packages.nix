@@ -103,6 +103,7 @@
     heroic
     sddm-astronaut
     radeontop
+    trash-cli
   ];
 
   services.hardware.openrgb = {
