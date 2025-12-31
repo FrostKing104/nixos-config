@@ -37,5 +37,6 @@
     zotero
     prismlauncher
     grimblast
+    godot
   ];
 }

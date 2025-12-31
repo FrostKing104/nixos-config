@@ -102,6 +102,7 @@
     snixembed
     heroic
     sddm-astronaut
+    radeontop
   ];
 
   services.hardware.openrgb = {
