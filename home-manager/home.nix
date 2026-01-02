@@ -31,21 +31,21 @@
   home.stateVersion = "24.05";
 
  # GTK Configuration 
- # gtk = {
- #   enable = true;
- #   font = {
- #     name = "Ubuntu";
- #     size = 11;
- #   };
- #   theme = {
- #     package = pkgs.gnome-themes-extra;
- #     name = "Adwaita-dark";  # Use dark variant
- #   };
- #   iconTheme = {
- #     package = pkgs.adwaita-icon-theme;
- #     name = "Adwaita";
- #   };
- # };
+  gtk = {
+    enable = true;
+    font = {
+      name = "Ubuntu";
+      size = 11;
+    };
+#    theme = {
+#      package = pkgs.gnome-themes-extra;
+#      name = "Adwaita-dark";  # Use dark variant
+#    };
+#    iconTheme = {
+#      package = pkgs.adwaita-icon-theme;
+#      name = "Adwaita";
+#    };
+  };
 
   # DConf settings for GTK font rendering
   dconf.settings = {

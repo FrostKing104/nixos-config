@@ -20,19 +20,18 @@
     
     catppuccin.url = "github:catppuccin/nix";
 
+#    caelestia-shell = {
+#      url = "github:caelestia-dots/shell";
+#      inputs.nixpkgs.follows = "nixos-unstable"; # Ensure it uses your 25.05 pkgs
+#     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
+      # IMPORTANT: Point this to your 'nixos-unstable' input, not 'nixpkgs'
       inputs.nixpkgs.follows = "nixos-unstable"; 
-    };
-
-    # aagl - Anime Game Launcher
-    aagl = {
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-unstable, nix-flatpak, home-manager, nixvim, catppuccin, aagl, ... }@inputs: 
+  outputs = { self, nixpkgs, nixos-unstable, nix-flatpak, home-manager, nixvim, catppuccin, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
@@ -43,12 +42,11 @@
         nix-flatpak.nixosModules.nix-flatpak
         ./configuration.nix
         home-manager.nixosModules.default
-        inputs.noctalia.nixosModules.default
-        aagl.nixosModules.default
+	inputs.noctalia.nixosModules.default
         {
           home-manager.users.anklus = {
             imports = [
-              nixvim.homeModules.nixvim
+	      nixvim.homeModules.nixvim
               ./home-manager/home.nix
             ];
           };
@@ -74,6 +72,8 @@
           echo "Run:  cd dev/opencode && bun run dev"
         '';
       };
+
+      # (You can define more dev shells here later, e.g. pythonDev)
     };
   };
 }

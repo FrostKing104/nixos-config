@@ -3,7 +3,16 @@
 
 { config, lib, pkgs, inputs, ... }:
 
-{
+
+let
+
+  #aagl = import (builtins.fetchTarball {
+  #  url = "github:ezYakaPaka/aagl-gtk-on-nix/release-25.11.tar.gz";
+  #  sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
+  #});
+  aagl = import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.11.tar.gz");
+
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -11,6 +20,7 @@
       ./packages.nix
       ./hyprland.nix 
       ./sddm.nix
+      aagl.module
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
     ];
@@ -260,7 +270,8 @@
     extra-experimental-features = [ "nix-command" "flakes" ];
     substituters = [ "https://ezkea.cachix.org" ];
     trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-  };
+  } // aagl.nixConfig;
+
 
   # Allow App Images to work properly
   programs.appimage.enable = true;
@@ -271,13 +282,14 @@
     FZF_BASE = "${pkgs.fzf}/share/fzf";
   };
 
+
   # An Anime Game Launcher:
   programs.anime-game-launcher.enable = true;
-  #programs.anime-games-launcher.enable = true;
+  programs.anime-games-launcher.enable = true;
   #programs.honkers-railway-launcher.enable = false;
   #programs.honkers-launcher.enable = false;
   programs.wavey-launcher.enable = true;
-  programs.sleepy-launcher.enable = true;
+  #programs.sleepy-launcher.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -331,4 +343,3 @@
   # NixOS release version for stateful data and default settings
   system.stateVersion = "24.11"; # Did you read the comment?
 }
-
