@@ -3,16 +3,7 @@
 
 { config, lib, pkgs, inputs, ... }:
 
-
-let
-
-  #aagl = import (builtins.fetchTarball {
-  #  url = "github:ezYakaPaka/aagl-gtk-on-nix/release-25.11.tar.gz";
-  #  sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
-  #});
-  aagl = import (builtins.fetchTarball "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.11.tar.gz");
-
-in {
+{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -20,7 +11,6 @@ in {
       ./packages.nix
       ./hyprland.nix 
       ./sddm.nix
-      aagl.module
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
     ];
@@ -36,19 +26,23 @@ in {
   # For fans
   boot.kernelModules = [ "nct6775" ];
 
-  networking.hostName = "desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+    hostName = "desktop"; # Define your hostname.
+  };
 
   # Enable Bluetooth
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
 
   # Enable 32 Bit (For Epic Games Store)
-  hardware.graphics.enable32Bit = true;
-
+  hardware.graphics = {
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      rocmPackages.clr.icd # For AMD GPU detection in Davinchi Resolve
+    ];
+  };
   # GTK Configuration
   programs.dconf.enable = true;
   services.dbus.enable = true;
@@ -270,8 +264,7 @@ in {
     extra-experimental-features = [ "nix-command" "flakes" ];
     substituters = [ "https://ezkea.cachix.org" ];
     trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
-  } // aagl.nixConfig;
-
+  };
 
   # Allow App Images to work properly
   programs.appimage.enable = true;
@@ -282,14 +275,13 @@ in {
     FZF_BASE = "${pkgs.fzf}/share/fzf";
   };
 
-
   # An Anime Game Launcher:
   programs.anime-game-launcher.enable = true;
-  programs.anime-games-launcher.enable = true;
+  #programs.anime-games-launcher.enable = true;
   #programs.honkers-railway-launcher.enable = false;
   #programs.honkers-launcher.enable = false;
   programs.wavey-launcher.enable = true;
-  #programs.sleepy-launcher.enable = true;
+  programs.sleepy-launcher.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -343,3 +335,4 @@ in {
   # NixOS release version for stateful data and default settings
   system.stateVersion = "24.11"; # Did you read the comment?
 }
+

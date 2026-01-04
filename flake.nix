@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+
+    # Version 24.11 for rocm that it supported on my Polaris AMD card
+    nixpkgs-rocm5.url = "github:nixos/nixpkgs/nixos-23.11";
     
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -32,7 +35,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-unstable, nix-flatpak, home-manager, nixvim, catppuccin, aagl, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-rocm5, nixos-unstable, nix-flatpak, home-manager, nixvim, catppuccin, aagl, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };

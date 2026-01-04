@@ -104,6 +104,8 @@
     sddm-astronaut
     radeontop
     trash-cli
+    kdePackages.kdenlive
+    shotcut
   ];
 
   services.hardware.openrgb = {
