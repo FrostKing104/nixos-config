@@ -38,5 +38,6 @@
     prismlauncher
     grimblast
     godot
+    ncdu
   ];
 }
