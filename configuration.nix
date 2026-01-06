@@ -139,13 +139,13 @@ in {
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
     fira-code
     dejavu_fonts
     font-awesome
     liberation_ttf
-    ubuntu_font_family
+    ubuntu-classic
     jetbrains-mono
     source-han-sans
     source-han-serif
@@ -273,7 +273,7 @@ in {
       fcitx5-mozc     # This should be here
       fcitx5-gtk
       fcitx5-tokyonight
-      fcitx5-configtool
+      qt6Packages.fcitx5-configtool 
     ];
   };
 

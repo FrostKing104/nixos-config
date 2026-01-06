@@ -7,7 +7,7 @@
 
   # Install fcitx5 packages for user access
   home.packages = with pkgs; [
-    fcitx5-configtool    # GUI configuration tool
+    qt6Packages.fcitx5-configtool    # GUI configuration tool
   ];
 
   # Tokyo Night theme configuration
