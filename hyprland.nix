@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  # Enable Hyprland system-wide
+  # Enable Hyprland
   programs.hyprland = {
     enable = true;
 
   };
 
-  # PAM integration for hyprlock
+  # Use hyprlock
   security.pam.services.hyprlock = {};
 }
 
