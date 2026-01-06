@@ -1,5 +1,5 @@
 # ~/nixos-config/packages.nix
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Allow unfree packages
@@ -11,11 +11,11 @@
   programs.steam.enable = true;
 
   # Install Waydroid
-  virtualisation.waydroid.enable = true;
+  #virtualisation.waydroid.enable = true;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    waydroid-helper
+    #waydroid-helper
     bindfs
     kitty
     hyprlock
@@ -99,20 +99,18 @@
     git-lfs
     wvkbd
     lazygit
-    
     gsettings-desktop-schemas
     # Hyprland Plugins
     hyprlandPlugins.hyprgrass
-    obs-studio
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    heroic
+    sddm-astronaut
+    trash-cli
   ];
-
-  services.hardware.openrgb.enable = true;
-
 
   services.flatpak = {
     enable = true;
     packages = [
-      #"app.zen_browser.zen"    
       "net.ankiweb.Anki"
       "org.libretro.RetroArch"
     ];
