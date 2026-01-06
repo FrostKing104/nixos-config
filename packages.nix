@@ -104,6 +104,7 @@
     gsettings-desktop-schemas
     # Hyprland Plugins
     hyprlandPlugins.hyprgrass
+    obs-studio
   ];
 
   services.hardware.openrgb.enable = true;
