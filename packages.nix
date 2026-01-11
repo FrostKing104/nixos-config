@@ -106,6 +106,7 @@
     trash-cli
     kdePackages.kdenlive
     shotcut
+    alsa-utils
   ];
 
   services.hardware.openrgb = {

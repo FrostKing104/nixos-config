@@ -22,7 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 5;
 
-  boot.kernelModules = [ "nct6775" "amdgpu" ];
+  boot.kernelModules = [ "nct6775" "amdgpu" "i2c-dev" "i2c-piix4" ];
 
   # 5. IP forwarding (The useRoutingFeatures="both" handles this, but explicit setup is safe)
   boot.kernel.sysctl = {
@@ -77,6 +77,9 @@
   hardware.graphics = {
     enable32Bit = true;
   };
+
+  # i2c for OpenRGB
+  hardware.i2c.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -159,7 +162,7 @@
   users.users.anklus = {
     isNormalUser = true;
     description = "Anklus";
-    extraGroups = [ "networkmanager" "wheel" "input" "video" "render" ];
+    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
