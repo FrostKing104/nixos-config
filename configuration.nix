@@ -277,7 +277,7 @@
   #programs.anime-games-launcher.enable = true;
   #programs.honkers-railway-launcher.enable = false;
   #programs.honkers-launcher.enable = false;
-  programs.wavey-launcher.enable = true;
+  #programs.wavey-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
 
   # Enable some programs for SUID wrappers
