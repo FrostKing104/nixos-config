@@ -142,10 +142,6 @@
               id = "Volume";
             }
             {
-              displayMode = "alwaysShow";
-              id = "Brightness";
-            }
-            {
               customFont = "";
               formatHorizontal = "h:mm AP — ddd, MMM";
               formatVertical = "h:mm AP ddd, MMM";
