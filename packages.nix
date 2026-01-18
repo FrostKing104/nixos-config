@@ -58,8 +58,6 @@
     sassc
     gtk-engine-murrine
     gnome-themes-extra
-    catppuccin-sddm
-    catppuccin-sddm-corners
     catppuccin
     nwg-look
     zsh-powerlevel10k
@@ -106,6 +104,13 @@
     heroic
     sddm-astronaut
     trash-cli
+    nextcloud-client
+    # Python
+    (python3.withPackages(p: with p; [
+      numpy
+      requests
+      pandas
+    ]))
   ];
 
   services.flatpak = {
