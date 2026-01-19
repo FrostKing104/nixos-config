@@ -107,6 +107,12 @@
     kdePackages.kdenlive
     shotcut
     alsa-utils
+    # Python
+    (python3.withPackages(p: with p; [
+      numpy
+      requests
+      pandas
+    ]))
   ];
 
   services.hardware.openrgb = {
