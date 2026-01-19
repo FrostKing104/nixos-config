@@ -113,6 +113,7 @@
       requests
       pandas
     ]))
+    qutebrowser
   ];
 
   services.hardware.openrgb = {

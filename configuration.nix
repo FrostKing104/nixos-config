@@ -280,6 +280,10 @@
   #programs.wavey-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
 
+  # Widevine configuration for playback in Qutebrowser on sites like Netflix, Spotify, etc.
+  nixpkgs.overlays = [
+    (final: prev: { qutebrowser = prev.qutebrowser.override { enableWideVine = true; }; })
+  ];
   # Enable some programs for SUID wrappers
   # programs.mtr.enable = true;
 
