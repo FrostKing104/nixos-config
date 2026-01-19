@@ -1,5 +1,3 @@
-# In your nixvim.nix, try this approach instead:
-
 { config, pkgs, inputs, ... }:
 let
   nixvimLib = inputs.nixvim.lib;
@@ -8,45 +6,59 @@ in
 {
   programs.nixvim = {
     enable = true;
-    
+
     opts = {
-      number = true;         # Show the absolute line number of the current line
-      relativenumber = true; # Show relative numbers for all other lines
-      shiftwidth = 2;        # Good practice for Nix/Lua files
+      number = true;
+      relativenumber = true;
+      shiftwidth = 2;
     };
-     
-    # Try using extraPlugins instead of the built-in telescope module
+
+    plugins.web-devicons.enable = true;
+
+    plugins.nvim-tree = {
+      enable = true;
+    };
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>e";
+        action = ":NvimTreeToggle<CR>";
+        options.desc = "Toggle NvimTree";
+      }
+    ];
+
     extraPlugins = with pkgs.vimPlugins; [
       telescope-nvim
       plenary-nvim
+      nvim-numbertoggle
+      # Manually adding the package here as a fallback
+      nvim-tree-lua
     ];
 
-    globals.mapleader = " ";  # Sets space as leader key
-    
-    # Configure telescope manually
+    globals.mapleader = " ";
+
     extraConfigLua = ''
+      -- Forced manual initialization
+      require('nvim-tree').setup({})
+
       require('telescope').setup({
         defaults = {
-          file_ignore_patterns = {
-            "%.git/",
-            "node_modules/",
-            "%.cache/"
-          },
+          file_ignore_patterns = { "%.git/", "node_modules/", "%.cache/" },
         },
       })
       
-      -- Set up keymaps
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' })
       vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find Buffers' })
     '';
-    
+
     extraPackages = with pkgs; [
       ripgrep
       fd
     ];
-    
+
     colorschemes.catppuccin = {
       enable = true;
       settings = {
@@ -54,8 +66,7 @@ in
         transparent_background = true;
       };
     };
-    
-    # Your other plugins...
+
     plugins.treesitter = {
       enable = true;
       settings = {
@@ -63,7 +74,7 @@ in
         indent.enable = true;
       };
     };
-    
+
     plugins.gitsigns = {
       enable = true;
     };
