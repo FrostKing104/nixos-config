@@ -9,6 +9,12 @@ in
   programs.nixvim = {
     enable = true;
     
+    opts = {
+      number = true;         # Show the absolute line number of the current line
+      relativenumber = true; # Show relative numbers for all other lines
+      shiftwidth = 2;        # Good practice for Nix/Lua files
+    };
+     
     # Try using extraPlugins instead of the built-in telescope module
     extraPlugins = with pkgs.vimPlugins; [
       telescope-nvim
