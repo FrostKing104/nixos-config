@@ -270,6 +270,7 @@
   # Environment Variables
   environment.variables = {
     FZF_BASE = "${pkgs.fzf}/share/fzf";
+    TERMINAL = "kitty";
   };
 
   # An Anime Game Launcher:

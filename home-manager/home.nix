@@ -77,6 +77,16 @@
     #GDK_DPI_SCALE = "1";
     # Make Firefox use Wayland when available, as opposed to XWayland
     MOZ_ENABLE_WAYLAND = "1";
+    TERMINAL = "kitty";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
+      "terminal-emulator" = [ "kitty.desktop" ];
+      "x-terminal-emulator" = [ "kitty.desktop" ];
+    };
   };
 
   # Let Home Manager install and manage itself.

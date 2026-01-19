@@ -114,6 +114,7 @@
       pandas
     ]))
     qutebrowser
+    tmux
   ];
 
   services.hardware.openrgb = {
