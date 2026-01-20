@@ -13,7 +13,6 @@
     amdgpu_top
     tmux
     fzf
-    gh
     lazygit
     commitizen
     zsh-powerlevel10k

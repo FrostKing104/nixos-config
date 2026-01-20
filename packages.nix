@@ -28,6 +28,7 @@
     pavucontrol
     
     # ---- Core System Utilities ---- #
+    gh
     git
     git-lfs
     git-credential-manager
