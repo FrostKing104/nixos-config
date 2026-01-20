@@ -1,44 +1,87 @@
-{ config, pkgs, ... }:
+# ~/nixos-config/home-manager/home-modules/packages.nix
+{ config, pkgs, inputs, ... }:
 
 {
-
-# --- Packages that should be installed to the user profile --- #
-
+  # ----- User Packages ----- #
   home.packages = with pkgs; [
-    rmpc
+
+    # ---- Terminal & Shell ---- #
+    kitty
+    fastfetch
+    yazi
     btop
-    kitty-themes
-    fzf
-    krita
-    dysk
-    base16-schemes
-    pastel
-    darkman
-    tokyonight-gtk-theme
-    osu-lazer-bin
     amdgpu_top
-    calibre
-    qbittorrent
-    gnome-boxes
-    chromium
-    cava
+    tmux
+    fzf
+    gh
+    lazygit
+    commitizen
+    zsh-powerlevel10k
+    fzf-zsh
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-history-substring-search
+    oh-my-zsh
+    astroterm
+
+    # ---- Development ---- #
     vscodium
-    lutris
-    legendary-gl
-    rare
-    wine
-    winetricks
-    ncmpcpp
-    mpc
+    godot
+    # Python Environment
+    (python3.withPackages(p: with p; [
+      numpy
+      requests
+      pandas
+    ]))
+
+    # ---- GUI Applications ---- #
+    brave
+    qutebrowser
+    vesktop
+    signal-desktop
+    localsend
+    nextcloud-client
+    zotero
+    calibre
+    gnome-boxes
+
+    # ---- Media & Creative ---- #
+    mpv
+    playerctl
+    pamixer
+    kdePackages.kdenlive
+    shotcut
+    krita
+    cava
     yt-dlp
     ffmpeg
-    bluetuith
-    stress-ng
-    zotero
+    
+    # ---- Gaming ---- #
+    heroic
+    lutris
+    legendary-gl
+    wine
+    winetricks
     prismlauncher
+    osu-lazer-bin
+
+    # ---- Music (MPD Related) ---- #
+    rmpc
+    mpc
+
+    # ---- Theming & Desktop UI ---- #
+    rofi
+    wofi
+    nwg-look
+    dysk
+    pastel
+    darkman
+    base16-schemes
+    tokyonight-gtk-theme
     grimblast
-    godot
-    ncdu
-    astroterm
+    
+    # ---- Flake Inputs / Custom ---- #
+    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

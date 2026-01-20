@@ -5,29 +5,71 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable programs
+  # ----- System Programs (Modules) ----- #
   programs.firefox.enable = true; 
   programs.zsh.enable = true;
   programs.steam.enable = true; 
+  programs.hyprland.enable = true; # Recommended over just putting package in list
 
-  # List packages installed in system profile. To search, run:
+  # ----- System Packages ----- #
   environment.systemPackages = with pkgs; [
-    kitty
-    hyprlock
-    fastfetch
-    networkmanagerapplet
-    git
-    syncthing
-    git-credential-manager
-    rofi
+    
+    # ---- Hardware & Drivers ---- #
     brightnessctl
-    hyprland
-    zsh
+    ddcutil
+    bluez
+    blueman
+    lm_sensors
+    opentabletdriver
+    lact
+    thinkfan
+    radeontop
+    alsa-utils
+    pavucontrol
+    
+    # ---- Core System Utilities ---- #
+    git
+    git-lfs
+    git-credential-manager
+    networkmanagerapplet
+    syncthing
+    tailscale
+    sunshine
+    gnome-keyring
+    flatpak
+    snixembed
+    libnotify
+    glib
+    gsettings-desktop-schemas
+    trash-cli
+    file
+    jq
     tree
-    wofi
+    
+    # ---- Display Manager & Theming Assets ---- #
+    # (These must be system-wide for SDDM to see them)
+    sddm-astronaut
+    catppuccin-sddm
+    catppuccin-sddm-corners
+    catppuccin
+    gnome-themes-extra
+    gtk-engine-murrine
+    
+    # ---- Hyprland Core ---- #
+    hyprlock
+    hyprpaper
+    hyprsunset
+    swww
     waybar
     swaynotificationcenter
-    blueman
+    wl-clipboard
+    cliphist
+    wtype
+    slurp
+    grim
+    swappy
+    
+    # ---- Dependencies & Libraries ---- #
     cmake
     meson
     cpio
@@ -35,97 +77,16 @@
     xorg.libXft
     cairo
     pango
-    bluez
-    localsend
-    hyprpaper
-    hyprsunset
-    gnome-keyring
-    oh-my-zsh
-    pamixer
-    jq
-    slurp
-    grim
-    wl-clipboard
-    libnotify
-    swappy
-    glib
-    signal-desktop
     sassc
-    gtk-engine-murrine
-    gnome-themes-extra
-    catppuccin-sddm
-    catppuccin-sddm-corners
-    catppuccin
-    nwg-look
-    zsh-powerlevel10k
-    fzf-zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-history-substring-search
-    vesktop
-    flatpak
-    pavucontrol
-    swww
-    tailscale
-    sunshine
-    # GTK
-    gnome-themes-extra
-    gtk-engine-murrine
-    gsettings-desktop-schemas
-    glib
-    # -
-    gh
-    mpv
-    ddcutil
-    playerctl
-    wtype
-    # Screenshots
-    swappy
-    grim
-    slurp
-    # Wayland Clipboard Manager
-    cliphist
-    file
-    yazi
-    brave
-    lm_sensors
-    opentabletdriver
-    commitizen
-    git-lfs
-    lazygit
-    thinkfan
-    lact
-    # Default quickshell, needed to run custom quickshell configurations
-    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    nextcloud-client
-    snixembed
-    heroic
-    sddm-astronaut
-    radeontop
-    trash-cli
-    kdePackages.kdenlive
-    shotcut
-    alsa-utils
-    # Python
-    (python3.withPackages(p: with p; [
-      numpy
-      requests
-      pandas
-    ]))
-    qutebrowser
-    tmux
   ];
 
+  # ----- System Services ----- #
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb; 
     motherboard = "amd"; 
-    server = {
-      port = 6742;      
-    };
+    server.port = 6742;      
   };
-
 
   services.flatpak = {
     enable = true;
