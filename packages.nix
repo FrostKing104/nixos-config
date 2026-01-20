@@ -95,8 +95,8 @@
     lazygit
     thinkfan
     lact
-#   Use for default quickshell
-#   inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
+    # Default quickshell, needed to run custom quickshell configurations
+    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     nextcloud-client
     snixembed

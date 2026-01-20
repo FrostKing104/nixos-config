@@ -10,6 +10,7 @@
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
     ./home-modules/zsh.nix    
+    ./home-modules/noctalia-shell.nix
     ./home-modules/quickshell.nix
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix
