@@ -18,6 +18,7 @@
       # Scripts
       fixtray = "source ~/nixos-config/scripts/fixTray.sh";
       checkshelldiff = "source ~/nixos-config/scripts/checkShellDiff.sh";
+      sky = "astroterm -a 33.8 -o -83.9 --color --constellations -u -t 4.5 -s 5 -f 30";
     };
   
     oh-my-zsh = {

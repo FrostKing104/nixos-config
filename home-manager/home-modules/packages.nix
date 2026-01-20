@@ -39,5 +39,6 @@
     grimblast
     godot
     ncdu
+    astroterm
   ];
 }
