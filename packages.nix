@@ -46,6 +46,7 @@
     file
     jq
     tree
+    protonvpn-gui
     bat
     ffmpegthumbnailer
     imagemagick 
