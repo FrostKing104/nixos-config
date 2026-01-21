@@ -50,6 +50,7 @@
     bat
     ffmpegthumbnailer
     imagemagick 
+    ueberzugpp
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)
