@@ -13,7 +13,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Fastfetch on Startup
-fastfetch --config ~/.config/fastfetch/ascii-only.jsonc
 fastfetch --config ~/.config/fastfetch/config.jsonc
 
 # --- Custom Utility Functions ---
