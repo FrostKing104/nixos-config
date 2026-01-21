@@ -260,7 +260,11 @@
     automatic = true;
     dates = "daily";
     options = "--delete-older-than 20d";
+    persistent = true;
   };
+
+  # Limit the generation count to 15 total
+  boot.loader.systemd-boot.configurationLimit = 15;
 
   # --- Environment Variables & Programs --- #
   # Allow App Images to work properly
