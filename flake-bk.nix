@@ -28,8 +28,6 @@
       inputs.nixpkgs.follows = "nixos-unstable"; 
     };
 
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
     # aagl - Anime Game Launcher
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
