@@ -1,0 +1,65 @@
+# --- Catppuccin Mocha Theme + Preview Script for FZF ---
+export FZF_DEFAULT_OPTS=" \
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+  --color=selected-bg:#45475a \
+  --multi \
+  --preview '~/.config/fzf/fzf-preview.sh {}'"
+
+# --- Custom FZF Keybinds ---
+bindkey '^f' fzf-file-widget
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Fastfetch on Startup
+fastfetch --config ~/.config/fastfetch/ascii-only.jsonc
+fastfetch --config ~/.config/fastfetch/config.jsonc
+
+# --- Custom Utility Functions ---
+
+# Quick Backup: bk file.txt -> file-bk.txt
+bk() {
+  for file in "$@"; do
+    if [[ -f "$file" ]]; then
+      local filename="${file%.*}"
+      local extension="${file##*.}"
+      if [[ "$filename" == "$extension" ]]; then
+        cp -iv "$file" "$filename-bk"
+      else
+        cp -iv "$file" "$filename-bk.$extension"
+      fi
+    else
+      echo "Error: '$file' is not a valid file."
+    fi
+  done
+}
+
+# Clean up backups: moves *-bk.* to trash if the original exists
+clearbk() {
+  local found_any=false
+  for bk_file in *-bk*; do
+    [[ -e "$bk_file" ]] || continue
+    local original
+    if [[ "$bk_file" == *"-bk."* ]]; then
+      original="${bk_file/-bk./.}"
+    else
+      original="${bk_file%-bk}"
+    fi
+    if [[ -f "$original" ]]; then
+      echo "Trashing backup: $bk_file (Original: $original)"
+      trash-put "$bk_file"
+      found_any=true
+    fi
+  done
+  if ! $found_any; then
+    echo "No matching backup files found to clear."
+  fi
+}
+
+# Custom function for fzf + nvim
+fzfnvim() {
+  local file
+  file=$(fzf --query="$1" --select-1 --exit-0)
+  [ -n "$file" ] && nvim "$file"
+}
