@@ -46,6 +46,9 @@
     file
     jq
     tree
+    bat
+    ffmpegthumbnailer
+    imagemagick 
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)
