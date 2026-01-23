@@ -32,8 +32,8 @@ in
       telescope-nvim
       plenary-nvim
       nvim-numbertoggle
+      # Manually adding the package here as a fallback
       nvim-tree-lua
-      harpoon2
     ];
 
     globals.mapleader = " ";
@@ -52,30 +52,6 @@ in
       vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' })
       vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find Buffers' })
-
-      -- Harpoon Setup
-      local harpoon = require("harpoon")
-      harpoon:setup({
-        settings = {
-          save_on_toggle = true,
-          sync_on_ui_close = true,
-        },
-        -- UI Customization
-        ui = {
-          border = "rounded", -- This gives you that clean, rounded look
-          width = vim.api.nvim_win_get_width(0) - 20, -- Dynamic width with padding
-          height = vim.api.nvim_win_get_height(0) - 10,
-        }
-      }) 
-
-      -- Harpoon Keymaps
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon Add" })
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Menu" })
-
-      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-      vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
-      vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
-      vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
     '';
 
     extraPackages = with pkgs; [
