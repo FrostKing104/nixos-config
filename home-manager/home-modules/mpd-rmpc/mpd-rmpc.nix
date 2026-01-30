@@ -111,7 +111,7 @@ programs.rmpc = {
 		"a":           Add,
 		"A":           AddAll,
 		"r":           Rename,
-		"n":           NextResult,
+		"n":           Add(AddOptions(kind: Action(all: false, autoplay: Off, position: AfterCurrentSong))),
 		"g":           Top,
 		"<Space>":     Select,
 		"G":           Bottom,
