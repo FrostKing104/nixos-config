@@ -2,13 +2,15 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # ----- Nix Packages Configuration ----- #
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   # ----- System Programs (Modules) ----- #
   programs.firefox.enable = true; 
   programs.zsh.enable = true;
-  programs.steam.enable = true; 
+  programs.steam.enable = true;
   programs.hyprland.enable = true; # Recommended over just putting package in list
 
   # ----- System Packages ----- #
@@ -51,6 +53,7 @@
     ffmpegthumbnailer
     imagemagick 
     ueberzugpp
+    steamcmd
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)

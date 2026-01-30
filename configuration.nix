@@ -15,6 +15,7 @@
       ./davinci-resolve.nix
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
+      ./selfHosting/terraria.nix
     ];
 
   # --- Bootloader & Kernel --- #
@@ -56,10 +57,10 @@
 
   # Open ports in the firewall.
   networking.firewall = {
-    allowedTCPPorts = [ 4713 8080 8000 ];
+    allowedTCPPorts = [ 4713 8080 8000 7777 ];
+    allowedUDPPorts = [ 7777 ];
     trustedInterfaces = [ "docker0" "tailscale0" ];
   };
-  # networking.firewall.allowedUDPPorts = [ ... ];
  
   # Disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -162,7 +163,7 @@
   users.users.anklus = {
     isNormalUser = true;
     description = "Anklus";
-    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" ];
+    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" "terraria" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
