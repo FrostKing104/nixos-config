@@ -13,7 +13,6 @@
       ./hyprland.nix 
       ./sddm.nix
       ./davinci-resolve.nix
-      ./minecraft.nix
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
     ];
