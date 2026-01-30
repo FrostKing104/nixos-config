@@ -15,7 +15,6 @@
       ./davinci-resolve.nix
       ./selfHosting/ai.nix
       ./selfHosting/nextcloud.nix
-      ./selfHosting/terraria.nix
     ];
 
   # --- Bootloader & Kernel --- #
