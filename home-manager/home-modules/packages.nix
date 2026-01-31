@@ -54,6 +54,7 @@
     cava
     yt-dlp
     ffmpeg
+    lrcget
     
     # ---- Gaming ---- #
     heroic
