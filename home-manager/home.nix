@@ -79,15 +79,38 @@
     # Make Firefox use Wayland when available, as opposed to XWayland
     MOZ_ENABLE_WAYLAND = "1";
     TERMINAL = "kitty";
+    DEFAULT_BROWSER = "firefox";
   };
 
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      # Terminal
       "x-scheme-handler/terminal" = [ "kitty.desktop" ];
       "terminal-emulator" = [ "kitty.desktop" ];
       "x-terminal-emulator" = [ "kitty.desktop" ];
+      # Web 
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/about" = [ "firefox.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      # Images
+      "image/jpeg" = [ "swappy.desktop" ];
+      "image/png" = [ "swappy.desktop" ];
+      "image/webp" = [ "swappy.desktop" ];
     };
+  };
+
+  # Custom swappy .desktop for automatic image opening
+  xdg.desktopEntries.swappy = {
+    name = "Swappy";
+    genericName = "Image Editor";
+    exec = "swappy -f %f"; # The %f tells Swappy to take the file path as an argument
+    icon = "swappy";
+    terminal = false;
+    categories = [ "Graphics" ];
+    mimeType = [ "image/png" "image/jpeg" "image/jpg" "image/webp" ];
   };
 
   # Let Home Manager install and manage itself.
