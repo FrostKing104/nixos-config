@@ -51,7 +51,7 @@
   # --- Networking & Firewall --- #
   networking = {
     networkmanager.enable = true;
-    hostName = "desktop"; # Define your hostname.
+    hostName = "desktop"; # Define hostname.
   };
 
   # Open ports in the firewall.
@@ -61,12 +61,20 @@
     trustedInterfaces = [ "docker0" "tailscale0" ];
   };
  
-  # Disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # 4. CRITICAL FIX: Allow WireGuard packets (Tailscale's tunnel) to pass through NixOS firewall
-  # This prevents loss of internet when using the exit node.
   networking.firewall.checkReversePath = "loose";
+
+  # -- Printing -- #
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip pkgs.epson-escpr ];
+  };
 
   # --- Hardware Support (GPU, Sound, Bluetooth, etc.) --- #
   # Enable Bluetooth
@@ -135,9 +143,6 @@
 
   # Enable Fstrim
   services.fstrim.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # --- X11 & Desktop Environment --- #
   # Enable the X11 windowing system.
