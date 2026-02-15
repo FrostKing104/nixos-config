@@ -11,6 +11,7 @@
     ./home-modules/desktopShortcuts.nix
     ./home-modules/noctalia-shell.nix
     ./home-modules/quickshell.nix
+    ./home-modules/wlr-which-key.nix
     ./home-modules/zsh/zsh.nix
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix

@@ -15,6 +15,7 @@
       sky = "astroterm -a 33.8 -o -83.9 --color --constellations -u -t 4.5 -s 5 -f 30";
       cc = "wl-copy";
       pp = "wl-paste";
+      obsidian = "flatpak run --command=obsidian md.obsidian.Obsidian";
     };
 
     oh-my-zsh = {

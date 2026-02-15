@@ -54,6 +54,10 @@
     imagemagick 
     ueberzugpp
     steamcmd
+    protontricks
+    wine64
+    p7zip
+    unrar
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)
@@ -87,6 +91,29 @@
     cairo
     pango
     sassc
+  ];
+
+  # ----- Nix-LD ----- #
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  # common libraries 
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  
+  # Graphics / UI 
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXi
+    libGL
+    fontconfig
+    freetype
   ];
 
   # ----- System Services ----- #

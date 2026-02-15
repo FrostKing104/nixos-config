@@ -55,6 +55,7 @@
     yt-dlp
     ffmpeg
     lrcget
+    hyprshot
     
     # ---- Gaming ---- #
     heroic
