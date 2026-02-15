@@ -26,6 +26,12 @@ in
         action = ":NvimTreeToggle<CR>";
         options.desc = "Toggle NvimTree";
       }
+      {
+        mode = [ "n" "i" "v" ];
+        key = "<A-z>";
+        action = "<cmd>undo<CR>";
+        options.desc = "Undo (Alt+Z)";
+      }
     ];
 
     extraPlugins = with pkgs.vimPlugins; [
