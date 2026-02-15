@@ -86,6 +86,13 @@
     enable32Bit = true;
   };
 
+  # Keyboard
+  hardware.keyboard.qmk.enable = true;
+  environment.systemPackages = with pkgs; [
+    vial        # Best GUI for configuring Corne v4.1 (real-time, no flashing)
+    qmk         # CLI tool if I need to compile custom firmware
+  ];
+
   # i2c for OpenRGB
   hardware.i2c.enable = true;
 
