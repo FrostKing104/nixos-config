@@ -9,9 +9,9 @@
     ./home-modules/fcitx5.nix
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
-    ./home-modules/noctalia-shell.nix
-    ./home-modules/quickshell.nix
     ./home-modules/wlr-which-key.nix
+    ./home-modules/noctalia-shell/noctalia-shell.nix
+    ./home-modules/noctalia-shell/quickshell.nix
     ./home-modules/zsh/zsh.nix
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix
@@ -69,6 +69,10 @@
   home.file.".local/share/fonts/Kugile.ttf" = {
     source = ./fonts/Kugile.ttf;
   };
+
+  # SSH Agent Configuration
+
+  services.ssh-agent.enable = true;
 
   fonts.fontconfig.enable = true;
 

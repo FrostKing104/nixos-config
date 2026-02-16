@@ -174,7 +174,7 @@
   users.users.anklus = {
     isNormalUser = true;
     description = "Anklus";
-    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" "terraria" ];
+    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" "terraria" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
