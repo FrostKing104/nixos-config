@@ -11,6 +11,7 @@ in
       number = true;
       relativenumber = true;
       shiftwidth = 2;
+      conceallevel = 2; # Required for render-markdown to hide markdown syntax
     };
 
     plugins.web-devicons.enable = true;
@@ -19,6 +20,38 @@ in
       enable = true;
     };
     
+    # --- Obsidian & Markdown Setup ---
+    plugins.obsidian = {
+      enable = true;
+      settings = {
+        completion = {
+          nvim_cmp = true;
+          min_chars = 2;
+        };
+        workspaces = [
+          {
+            name = "Main Vault";
+            path = "~/Documents/Obsidian Vaults/Main Vault";
+          }
+        ];
+        # Optional: Daily notes configuration
+        #daily_notes = {
+        #  folder = "dailies";
+        #  date_format = "%Y-%m-%d";
+        #};
+      };
+    };
+
+    plugins.render-markdown = {
+      enable = true;
+      settings = {
+        # Can override 
+        # colors/icons here if needed.
+        file_types = [ "markdown" "Avante" ]; 
+      };
+    };
+    # --------------------------------------
+
     keymaps = [
       {
         mode = "n";
@@ -94,6 +127,32 @@ in
       settings = {
         flavour = "mocha";
         transparent_background = true;
+        no_bold = false; 
+        
+        custom_highlights = {
+          "@markup.strong" = { bold = true; };
+          "RenderMarkdownBold" = { bold = true; };
+          "RenderMarkdownH1Bg" = { bold = true; };
+        };
+        
+        integrations = {
+          treesitter = true;
+          native_lsp = {
+            enabled = true;
+            virtual_text = {
+              errors = [ "italic" ];
+              hints = [ "italic" ];
+              warnings = [ "italic" ];
+              information = [ "italic" ];
+            };
+            underlines = {
+              errors = [ "underline" ];
+              hints = [ "underline" ];
+              warnings = [ "underline" ];
+              information = [ "underline" ];
+            };
+          };
+        };
       };
     };
 
@@ -102,6 +161,7 @@ in
       settings = {
         highlight.enable = true;
         indent.enable = true;
+        ensure_installed = [ "markdown" "markdown_inline" ]; 
       };
     };
 
