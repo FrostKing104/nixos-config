@@ -29,7 +29,6 @@
         };
       };
     };
-
     pluginSettings = {
       tailscale = {
         showIpAddress = true;
@@ -231,6 +230,9 @@
               displayMode = "onhover";
               id = "Bluetooth";
             }
+	    {
+              id = "tailscale";
+	    }
             {
               displayMode = "onhover";
               id = "Network";
@@ -248,7 +250,6 @@
               middleClickCommand = "pwvucontrol || pavucontrol";
             }
             {
-              id = "plugin:tailscale";
             }
             {
               customFont = "";
@@ -261,6 +262,11 @@
             }
           ];
         };
+      };
+      brightness = {
+        brightnessStep = 5;
+	enableDdcSupport = true;
+	enforceMinimum = false;
       };
 
       colorSchemes = {
@@ -351,11 +357,12 @@
       };
 
       hooks = {
+	enabled = true;
         darkModeChange = "";
         performanceModeDisabled = "";
         performanceModeEnabled = "";
         screenLock = "";
-        screenUnlock = "";
+        screenUnlock = "notif-send \"Welcome back, sir.\"";
         session = "";
         startup = "";
         wallpaperChange = "";
