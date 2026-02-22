@@ -231,9 +231,6 @@
               id = "Bluetooth";
             }
 	    {
-              id = "tailscale";
-	    }
-            {
               displayMode = "onhover";
               id = "Network";
             }
@@ -250,6 +247,7 @@
               middleClickCommand = "pwvucontrol || pavucontrol";
             }
             {
+	      id = "plugin:tailscale";
             }
             {
               customFont = "";
