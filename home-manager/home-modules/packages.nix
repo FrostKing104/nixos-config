@@ -26,6 +26,7 @@
     # ---- Development ---- #
     vscodium
     godot
+    opencode
     # Python Environment
     (python3.withPackages(p: with p; [
       numpy
@@ -43,6 +44,7 @@
     zotero
     calibre
     gnome-boxes
+    element-desktop
 
     # ---- Media & Creative ---- #
     mpv

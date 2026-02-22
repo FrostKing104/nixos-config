@@ -12,6 +12,7 @@ in
       relativenumber = true;
       shiftwidth = 2;
       conceallevel = 2; # Required for render-markdown to hide markdown syntax
+      autoread = true;  # Recommended for opencode auto_reload
     };
 
     plugins.web-devicons.enable = true;
@@ -65,6 +66,24 @@ in
         action = "<cmd>undo<CR>";
         options.desc = "Undo (Alt+Z)";
       }
+      {
+        mode = [ "n" "v" ];
+        key = "<C-a>";
+        action = "<cmd>lua require('opencode').ask('@this: ', { submit = true })<CR>";
+        options.desc = "Ask OpenCode";
+      }
+      {
+        mode = [ "n" "v" ];
+        key = "<C-x>";
+        action = "<cmd>lua require('opencode').select()<CR>";
+        options.desc = "OpenCode Menu";
+      }
+      {
+        mode = [ "n" "t" ];
+        key = "<C-.>";
+        action = "<cmd>lua require('opencode').toggle()<CR>";
+        options.desc = "Toggle OpenCode";
+      }
     ];
 
     extraPlugins = with pkgs.vimPlugins; [
@@ -73,11 +92,31 @@ in
       nvim-numbertoggle
       nvim-tree-lua
       harpoon2
+      
+      # Add OpenCode directly from GitHub
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "opencode-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "nickjvandyke";
+          repo = "opencode.nvim";
+          rev = "main"; 
+          hash = "sha256-Aji69IruHjp4cUj1l47X6Zs6VuvxGqYgvD3EKPtObC8="; 
+        };
+      })
     ];
 
     globals.mapleader = " ";
 
     extraConfigLua = ''
+      -- Initialize OpenCode
+      vim.g.opencode_opts = {
+          auto_reload = true,
+          provider = {
+              enabled = "tmux",
+              tmux = {}
+          }
+      }
+
       -- Forced manual initialization
       require('nvim-tree').setup({})
 

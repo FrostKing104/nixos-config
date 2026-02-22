@@ -72,7 +72,7 @@
             4. **Hyprland:** Assume standard Hyprland config files (.conf) for UI adjustments.
           '';
           apiKeys = {
-            google = "AIzaSyBpmz4762Ns5R0SLrhs0H6KmNfplWU-SLI";
+            google = "";
           };
         };
       };

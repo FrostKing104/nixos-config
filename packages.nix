@@ -42,6 +42,7 @@
     flatpak
     snixembed
     libnotify
+    lsof
     glib
     gsettings-desktop-schemas
     trash-cli
