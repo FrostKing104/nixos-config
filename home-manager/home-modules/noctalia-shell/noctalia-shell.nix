@@ -27,6 +27,10 @@
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
+        pomodoro = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
       };
     };
     pluginSettings = {
@@ -46,7 +50,7 @@
         ai = {
           provider = "google";
           model = "gemini-2.5-flash";
-	  systemPrompt = ''
+          systemPrompt = ''
             You are a smart assistant integrated into a Linux desktop shell.
 
             USER PROFILE:
@@ -62,7 +66,7 @@
               - **GPU:** AMD Radeon RX 580 2048SP (Discrete).
               - **RAM:** 16GB (2x8GB, ddr4).
               - **Display:** 1920x1080 @ 60Hz.
-	      - **Keyboard:** Custome Corne 4.1, managed with Vial
+          - **Keyboard:** Custome Corne 4.1, managed with Vial
 
             GUIDELINES:
             1. **NixOS Context:** Assume a declarative system (configuration.nix/home-manager) for all software advice.
@@ -230,7 +234,7 @@
               displayMode = "onhover";
               id = "Bluetooth";
             }
-	    {
+            {
               displayMode = "onhover";
               id = "Network";
             }
@@ -247,7 +251,10 @@
               middleClickCommand = "pwvucontrol || pavucontrol";
             }
             {
-	      id = "plugin:tailscale";
+              id = "plugin:tailscale";
+            }
+            {
+              id = "plugin:pomodoro";
             }
             {
               customFont = "";
@@ -263,8 +270,8 @@
       };
       brightness = {
         brightnessStep = 5;
-	enableDdcSupport = true;
-	enforceMinimum = false;
+        enableDdcSupport = true;
+        enforceMinimum = false;
       };
 
       colorSchemes = {
@@ -355,7 +362,7 @@
       };
 
       hooks = {
-	enabled = true;
+        enabled = true;
         darkModeChange = "";
         performanceModeDisabled = "";
         performanceModeEnabled = "";
@@ -447,12 +454,12 @@
         largeButtonsStyle = false;
         position = "center";
         powerOptions = [
-          { action = "lock"; enabled = true; keybind = "1"; }
-          { action = "suspend"; enabled = true; keybind = "2"; }
-          { action = "hibernate"; enabled = true; keybind = "3"; }
+          { action = "lock"; enabled = true; keybind = "1"; countdownEnabled = false; }
+          { action = "logout"; enabled = true; keybind = "2"; }
+          { action = "suspend"; enabled = true; keybind = "3"; }
+          { action = "hibernate"; enabled = false; keybind = "3"; }
           { action = "reboot"; enabled = true; keybind = "4"; }
-          { action = "logout"; enabled = true; keybind = "5"; }
-          { action = "shutdown"; enabled = true; keybind = "6"; }
+          { action = "shutdown"; enabled = true; keybind = "5"; }
         ];
         showHeader = true;
         showNumberLabels = true;
