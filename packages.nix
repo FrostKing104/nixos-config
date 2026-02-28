@@ -59,6 +59,7 @@
     wine64
     p7zip
     unrar
+    gpu-screen-recorder
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)
