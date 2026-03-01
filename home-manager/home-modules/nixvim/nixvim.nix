@@ -100,7 +100,7 @@ in
           owner = "nickjvandyke";
           repo = "opencode.nvim";
           rev = "main"; 
-          hash = "sha256-Aji69IruHjp4cUj1l47X6Zs6VuvxGqYgvD3EKPtObC8="; 
+          hash = "sha256-QQVgQaQ877BKykDvrdZO0cyJQna9f5B1/vTfESLLGoE="; 
         };
       })
     ];
@@ -111,10 +111,7 @@ in
       -- Initialize OpenCode
       vim.g.opencode_opts = {
           auto_reload = true,
-          provider = {
-              enabled = "tmux",
-              tmux = {}
-          }
+	  server = {}
       }
 
       -- Forced manual initialization
