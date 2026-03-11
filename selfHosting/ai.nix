@@ -1,4 +1,4 @@
-# ~/nixos-config/hyprland.conf
+# ~/nixos-config/selfHosting/ai.nix
 { config, pkgs, ... }:
 
 {
@@ -8,10 +8,6 @@
     enable = true;
     # Make Ollama accessible from network
     host = "0.0.0.0";  # Listen on all interfaces
-  # Allow CORS requests from Obsidian
-    environmentVariables = {
-      OLLAMA_ORIGINS = "app://obsidian.md*";
-    };
   };
 
   # Install Open WebUI
@@ -23,4 +19,3 @@
 
   virtualisation.docker.enable = true;
 }
-
