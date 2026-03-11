@@ -16,6 +16,7 @@
       cc = "wl-copy";
       pp = "wl-paste";
       obsidian = "flatpak run --command=obsidian md.obsidian.Obsidian";
+      storage = "ncdu";
     };
 
     oh-my-zsh = {
