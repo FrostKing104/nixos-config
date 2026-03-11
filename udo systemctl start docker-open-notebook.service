@@ -1,0 +1,24 @@
+[0;1;32m●[0m docker-surrealdb.service
+     Loaded: loaded (]8;;file://desktop/etc/systemd/system/docker-surrealdb.service\/etc/systemd/system/docker-surrealdb.service]8;;\; [0;1;32menabled[0m; preset: ignored)
+     Active: [0;1;32mactive (running)[0m since Sun 2026-03-01 13:20:03 EST; 27s ago
+ Invocation: 058a0bf8349d40e58f9fc3e49d3d8295
+    Process: 1063117 ExecStartPre=/nix/store/dr1n2hi2fa2a5d89vzw6xhzh1p8m2c8d-pre-start/bin/pre-start (code=exited, status=0/SUCCESS)
+   Main PID: 1063133 (docker)
+         IP: 0B in, 0B out
+         IO: 0B read, 0B written
+      Tasks: 12[0;38;5;245m (limit: 38307)[0m
+     Memory: 9.1M (peak: 10.6M)
+        CPU: 51ms
+     CGroup: /system.slice/docker-surrealdb.service
+             └─[0;38;5;245m1063133 /nix/store/qjqkj11zrawjf22bsjr57pjhy9a95v5m-docker-28.5.2/libexec/docker/docker run --name=surrealdb --log-driver=journald -p 8000:8000 -u root -v /var/lib/surrealdb:/mydata --rm --pull missing surrealdb/surrealdb:v2 start --log info --user root --pass root rocksdb:/mydata/mydatabase.db[0m
+
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.700481Z  INFO surrealdb::core::kvs::rocksdb: Setting delete compaction factory: 1000 / 50 (0.5)
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.700486Z  INFO surrealdb::core::kvs::rocksdb: Setting compaction style: level
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.700488Z  INFO surrealdb::core::kvs::rocksdb: Setting compression level
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.700491Z  INFO surrealdb::core::kvs::rocksdb: Setting storage engine log level: warn
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.700501Z  INFO surrealdb::core::kvs::rocksdb: Background write-ahead-log flushing: disabled
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.769858Z  INFO surrealdb::core::kvs::ds: Started kvs store at rocksdb:///mydata/mydatabase.db
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.771516Z  INFO surreal::dbs: Initialising credentials user=root
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.771627Z  INFO surrealdb::core::kvs::ds: Credentials were provided, and no root users were found. The root user 'root' will be created
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.805299Z  INFO surrealdb::net: Started web server on 0.0.0.0:8000
+Mar 01 13:20:03 desktop docker-surrealdb-start[1063133]: 2026-03-01T18:20:03.805282Z  INFO surrealdb::net: Listening for a system shutdown signal.

@@ -3,6 +3,14 @@
 {
   imports = [ inputs.noctalia.homeModules.default ];
 
+  # Fix for KDE notification watcher stealing notifications from the shell
+  systemd.user.services.plasma-kded6 = {
+    Unit = {
+      # Prevents the daemon from starting in Hyprland - Will only start in kde
+      ConditionEnvironment = "XDG_CURRENT_DESKTOP=KDE";
+    };
+  };
+
   programs.noctalia-shell = {
     enable = true;
 
@@ -175,6 +183,10 @@
               colorizeIcons = true;
               usePrimaryColor = true;
             }
+	    {
+	      id = "NoctaliaPerformance";
+	      iconColor = "none";
+	    }
             {
               id = "ActiveWindow";
             }
@@ -371,8 +383,8 @@
       hooks = {
         enabled = true;
         darkModeChange = "";
-        performanceModeDisabled = "";
-        performanceModeEnabled = "";
+        performanceModeDisabled = "./.config/hypr/scripts/GameMode.sh";
+        performanceModeEnabled = "./.config/hypr/scripts/GameMode.sh";
         screenLock = "";
         screenUnlock = "notif-send \"Welcome back, sir.\"";
         session = "";
