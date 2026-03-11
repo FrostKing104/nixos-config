@@ -56,7 +56,7 @@
 
   # Open ports in the firewall.
   networking.firewall = {
-    allowedTCPPorts = [ 4713 8080 8000 7777 ];
+    allowedTCPPorts = [ 4713 8080 8000 7777 11434 ];
     allowedUDPPorts = [ 7777 ];
     trustedInterfaces = [ "docker0" "tailscale0" ];
   };
