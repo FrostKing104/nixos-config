@@ -28,7 +28,6 @@
     radeontop
     alsa-utils
     pavucontrol
-    ncdu
     
     # ---- Core System Utilities ---- #
     gh

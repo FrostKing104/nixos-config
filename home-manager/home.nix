@@ -10,6 +10,7 @@
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
     ./home-modules/wlr-which-key.nix
+    ./home-modules/ncdu.nix
     ./home-modules/noctalia-shell/noctalia-shell.nix
     ./home-modules/noctalia-shell/quickshell.nix
     ./home-modules/zsh/zsh.nix
