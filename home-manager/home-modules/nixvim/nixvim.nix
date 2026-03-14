@@ -11,8 +11,11 @@ in
       number = true;
       relativenumber = true;
       shiftwidth = 2;
-      conceallevel = 2; # Required for render-markdown to hide markdown syntax
-      autoread = true;  # Recommended for opencode auto_reload
+      tabstop = 2;
+      expandtab = true;
+      termguicolors = true;
+      conceallevel = 2;
+      autoread = true;
     };
 
     plugins.web-devicons.enable = true;
@@ -20,8 +23,19 @@ in
     plugins.nvim-tree = {
       enable = true;
     };
-    
-    # --- Obsidian & Markdown Setup ---
+
+    plugins.indent-blankline = {
+      enable = true;
+      settings = {
+        indent = {
+          char = "│";
+        };
+        scope = {
+          enabled = false; # mini.indentscope handles the animated scope line
+        };
+      };
+    };
+
     plugins.obsidian = {
       enable = true;
       settings = {
@@ -35,23 +49,15 @@ in
             path = "~/Documents/Obsidian Vaults/Main Vault";
           }
         ];
-        # Optional: Daily notes configuration
-        #daily_notes = {
-        #  folder = "dailies";
-        #  date_format = "%Y-%m-%d";
-        #};
       };
     };
 
     plugins.render-markdown = {
       enable = true;
       settings = {
-        # Can override 
-        # colors/icons here if needed.
-        file_types = [ "markdown" "Avante" ]; 
+        file_types = [ "markdown" "Avante" ];
       };
     };
-    # --------------------------------------
 
     keymaps = [
       {
@@ -92,15 +98,15 @@ in
       nvim-numbertoggle
       nvim-tree-lua
       harpoon2
-      
-      # Add OpenCode directly from GitHub
+      mini-nvim  # <-- add this
+
       (pkgs.vimUtils.buildVimPlugin {
         name = "opencode-nvim";
         src = pkgs.fetchFromGitHub {
           owner = "nickjvandyke";
           repo = "opencode.nvim";
-          rev = "main"; 
-          hash = "sha256-QQVgQaQ877BKykDvrdZO0cyJQna9f5B1/vTfESLLGoE="; 
+          rev = "main";
+          hash = "sha256-QQVgQaQ877BKykDvrdZO0cyJQna9f5B1/vTfESLLGoE=";
         };
       })
     ];
@@ -108,42 +114,51 @@ in
     globals.mapleader = " ";
 
     extraConfigLua = ''
-      -- Initialize OpenCode
       vim.g.opencode_opts = {
-          auto_reload = true,
-	  server = {}
+        auto_reload = true,
+        server = {}
       }
 
-      -- Forced manual initialization
       require('nvim-tree').setup({})
+
+      -- mini.indentscope: animated scope line for current block
+      require('mini.indentscope').setup({
+        symbol = "│",
+        options = { try_as_border = true },
+        draw = {
+          delay = 0,
+          animation = require('mini.indentscope').gen_animation.quadratic({
+            easing = 'out',
+            duration = 60,
+            unit = 'total',
+          }),
+        },
+      })
 
       require('telescope').setup({
         defaults = {
           file_ignore_patterns = { "%.git/", "node_modules/", "%.cache/" },
         },
       })
-      
+
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' })
       vim.keymap.set('n', '<leader>g', builtin.live_grep, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find Buffers' })
 
-      -- Harpoon Setup
       local harpoon = require("harpoon")
       harpoon:setup({
         settings = {
           save_on_toggle = true,
           sync_on_ui_close = true,
         },
-        -- UI Customization
         ui = {
-          border = "rounded", -- This gives you that clean, rounded look
-          width = vim.api.nvim_win_get_width(0) - 20, -- Dynamic width with padding
+          border = "rounded",
+          width = vim.api.nvim_win_get_width(0) - 20,
           height = vim.api.nvim_win_get_height(0) - 10,
         }
-      }) 
+      })
 
-      -- Harpoon Keymaps
       vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon Add" })
       vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Menu" })
 
@@ -163,14 +178,16 @@ in
       settings = {
         flavour = "mocha";
         transparent_background = true;
-        no_bold = false; 
-        
+        no_bold = false;
+
         custom_highlights = {
           "@markup.strong" = { bold = true; };
           "RenderMarkdownBold" = { bold = true; };
           "RenderMarkdownH1Bg" = { bold = true; };
+          "MiniIndentscopeSymbol" = { fg = "#cba6f7"; };
+          "IblIndent" = { fg = "#45475a"; };
         };
-        
+
         integrations = {
           treesitter = true;
           native_lsp = {
@@ -197,7 +214,7 @@ in
       settings = {
         highlight.enable = true;
         indent.enable = true;
-        ensure_installed = [ "markdown" "markdown_inline" ]; 
+        ensure_installed = [ "markdown" "markdown_inline" ];
       };
     };
 
