@@ -589,10 +589,10 @@
       };
 
       wallpaper = {
-        automationEnabled = true;
+        automationEnabled = false;
         directory = "/home/anklus/Pictures/wallpapers/";
         enableMultiMonitorDirectories = false;
-        enabled = true;
+        enabled = false;
         favorites = [];
         fillColor = "#000000";
         fillMode = "crop";

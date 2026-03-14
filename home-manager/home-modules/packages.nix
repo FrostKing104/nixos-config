@@ -22,6 +22,7 @@
     zsh-history-substring-search
     oh-my-zsh
     astroterm
+    imagemagick
 
     # ---- Development ---- #
     vscodium
