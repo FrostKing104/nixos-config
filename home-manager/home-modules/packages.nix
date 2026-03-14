@@ -1,38 +1,91 @@
-{ config, pkgs, ... }:
+# ~/nixos-config/home-manager/home-modules/packages.nix
+{ config, pkgs, inputs, ... }:
 
 {
-
-# --- Packages that should be installed to the user profile --- #
-
+  # ----- User Packages ----- #
   home.packages = with pkgs; [
-    rmpc
+
+    # ---- Terminal & Shell ---- #
+    kitty
+    fastfetch
+    yazi
     btop
-    kitty-themes
-    fzf
-    krita
-    dysk
-    base16-schemes
-    pastel
-    darkman
-    tokyonight-gtk-theme
-    osu-lazer-bin
     amdgpu_top
-    calibre
-    qbittorrent
-    gnome-boxes
-    chromium
-    cava
+    tmux
+    fzf
+    lazygit
+    commitizen
+    zsh-powerlevel10k
+    fzf-zsh
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-history-substring-search
+    oh-my-zsh
+    astroterm
+    imagemagick
+
+    # ---- Development ---- #
     vscodium
-    lutris
-    legendary-gl
-    rare
-    wine
-    winetricks
-    ncmpcpp
-    mpc
+    godot
+    opencode
+    # Python Environment
+    (python3.withPackages(p: with p; [
+      numpy
+      requests
+      pandas
+    ]))
+
+    # ---- GUI Applications ---- #
+    brave
+    qutebrowser
+    vesktop
+    signal-desktop
+    localsend
+    nextcloud-client
+    zotero
+    calibre
+    gnome-boxes
+    element-desktop
+
+    # ---- Media & Creative ---- #
+    mpv
+    playerctl
+    pamixer
+    kdePackages.kdenlive
+    shotcut
+    krita
+    cava
     yt-dlp
     ffmpeg
-    moonlight-qt
-    readest
+    lrcget
+    hyprshot
+    
+    # ---- Gaming ---- #
+    heroic
+    lutris
+    legendary-gl
+    wine
+    winetricks
+    prismlauncher
+    osu-lazer-bin
+
+    # ---- Music (MPD Related) ---- #
+    rmpc
+    mpc
+
+    # ---- Theming & Desktop UI ---- #
+    rofi
+    wofi
+    nwg-look
+    dysk
+    pastel
+    darkman
+    base16-schemes
+    tokyonight-gtk-theme
+    grimblast
+    
+    # ---- Flake Inputs / Custom ---- #
+    inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

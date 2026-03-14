@@ -2,37 +2,96 @@
 { config, pkgs, inputs, ... }:
 
 {
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # ----- Nix Packages Configuration ----- #
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
-  # Enable programs
+  # ----- System Programs (Modules) ----- #
   programs.firefox.enable = true; 
   programs.zsh.enable = true;
   programs.steam.enable = true;
+  programs.hyprland.enable = true; # Recommended over just putting package in list
 
-  # Install Waydroid
-  #virtualisation.waydroid.enable = true;
-
-  # List packages installed in system profile. To search, run:
+  # ----- System Packages ----- #
   environment.systemPackages = with pkgs; [
-    #waydroid-helper
-    bindfs
-    kitty
-    hyprlock
-    fastfetch
-    networkmanagerapplet
-    git
-    syncthing
+    
+    # ---- Framework / Laptop Specific ---- #
+
+    # --- Framework Specific --- #
     framework-tool
-    git-credential-manager
-    rofi
+
+    # --- Laptop Specific --- #
+
+    # ---- Hardware & Drivers ---- #
     brightnessctl
-    zsh
+    ddcutil
+    bluez
+    blueman
+    lm_sensors
+    opentabletdriver
+    lact
+    thinkfan
+    radeontop
+    alsa-utils
+    pavucontrol
+    
+    # ---- Core System Utilities ---- #
+    gh
+    git
+    git-lfs
+    git-credential-manager
+    networkmanagerapplet
+    syncthing
+    tailscale
+    sunshine
+    gnome-keyring
+    flatpak
+    snixembed
+    libnotify
+    lsof
+    glib
+    gsettings-desktop-schemas
+    trash-cli
+    file
+    jq
     tree
-    wofi
+    protonvpn-gui
+    bat
+    ffmpegthumbnailer
+    imagemagick 
+    ueberzugpp
+    steamcmd
+    protontricks
+    wine64
+    p7zip
+    unrar
+    gpu-screen-recorder
+    
+    # ---- Display Manager & Theming Assets ---- #
+    sddm-astronaut
+    catppuccin-sddm
+    catppuccin-sddm-corners
+    catppuccin
+    gnome-themes-extra
+    gtk-engine-murrine
+    
+    # ---- Hyprland Core ---- #
+    hyprlock
+    hyprpaper
+    hyprsunset
+    swww
     waybar
     swaynotificationcenter
-    blueman
+    wl-clipboard
+    cliphist
+    wtype
+    slurp
+    grim
+    swappy
+    hyprlandPlugins.hyprgrass
+
+    # ---- Dependencies & Libraries ---- #
     cmake
     meson
     cpio
@@ -40,84 +99,51 @@
     xorg.libXft
     cairo
     pango
-    bluez
-    localsend
-    hyprpaper
-    hyprsunset
-    gnome-keyring
-    oh-my-zsh
-    pamixer
-    jq
-    slurp
-    grim
-    wl-clipboard
-    libnotify
-    swappy
-    glib
-    signal-desktop
     sassc
-    gtk-engine-murrine
-    gnome-themes-extra
-    catppuccin
-    nwg-look
-    zsh-powerlevel10k
-    fzf-zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-history-substring-search
-    vesktop
-    flatpak
-    pavucontrol
-    swww
-    tailscale
-    sunshine
-    # GTK
-    gnome-themes-extra
-    gtk-engine-murrine
-    gsettings-desktop-schemas
-    glib
-    # -
-    gh
-    mpv
-    ddcutil
-    playerctl
-    wtype
-    # Screenshots
-    swappy
-    grim
-    slurp
-    # Wayland Clipboard Manager
-    cliphist
-    file
-    yazi
-    brave
-    lm_sensors
-    opentabletdriver
-    commitizen
-    git-lfs
-    wvkbd
-    lazygit
-    gsettings-desktop-schemas
-    # Hyprland Plugins
-    hyprlandPlugins.hyprgrass
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    heroic
-    sddm-astronaut
-    trash-cli
-    nextcloud-client
-    # Python
-    (python3.withPackages(p: with p; [
-      numpy
-      requests
-      pandas
-    ]))
   ];
+
+  # ----- Nix-LD ----- #
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+  # common libraries 
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  
+  # Graphics / UI 
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXrandr
+    xorg.libXi
+    libGL
+    fontconfig
+    freetype
+  ];
+
+  # ----- System Services ----- #
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb; 
+    motherboard = "amd"; 
+    server.port = 6742;      
+  };
 
   services.flatpak = {
     enable = true;
+    remotes = [{
+      name = "flathub";
+      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    }];
     packages = [
       "net.ankiweb.Anki"
+      "net.waterfox.waterfox"
       "org.libretro.RetroArch"
+      "com.usebottles.bottles"
     ];
     uninstallUnused = true;
   };

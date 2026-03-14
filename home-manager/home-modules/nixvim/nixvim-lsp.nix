@@ -28,8 +28,13 @@
         settings = {
           formatting = {
             command = [ "nixpkgs-fmt" ];
-	  nix.flake.autoArchive = true;
           };
+	  nix = {
+	    flake = {
+	      autoArchive = true;
+	      #autoEvalInputs = true;
+	    };
+	  };
         };
       };
       

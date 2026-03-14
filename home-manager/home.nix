@@ -4,13 +4,16 @@
   # IMPORTS
   imports = [
     # REMOVED: inputs.catppuccin.homeModules.catppuccin - this is handled in catppuccin.nix
-    ./wofi.nix
+    ./home-modules/wofi.nix
     ./home-modules/packages.nix
     ./home-modules/fcitx5.nix
     ./home-modules/catppuccin.nix
     ./home-modules/desktopShortcuts.nix
-    ./home-modules/zsh.nix    
-    #./home-modules/hyprland.nix
+    ./home-modules/wlr-which-key.nix
+    ./home-modules/ncdu.nix
+    ./home-modules/noctalia-shell/noctalia-shell.nix
+    ./home-modules/noctalia-shell/quickshell.nix
+    ./home-modules/zsh/zsh.nix
     ./home-modules/nixvim/nixvim.nix
     ./home-modules/mpd-rmpc/mpd-rmpc.nix
   ];
@@ -30,22 +33,22 @@
   # changes in each release.
   home.stateVersion = "24.05";
 
-  # GTK Configuration (back to manual since Catppuccin GTK is removed)
- # gtk = {
- #   enable = true;
- #   font = {
- #     name = "Ubuntu";
- #     size = 11;
- #   };
- #   theme = {
- #     package = pkgs.gnome-themes-extra;
- #     name = "Adwaita-dark";  # Use dark variant
- #   };
- #   iconTheme = {
- #     package = pkgs.adwaita-icon-theme;
- #     name = "Adwaita";
- #   };
- # };
+ # GTK Configuration 
+  gtk = {
+    enable = true;
+    font = {
+      name = "Ubuntu";
+      size = 11;
+    };
+#    theme = {
+#      package = pkgs.gnome-themes-extra;
+#      name = "Adwaita-dark";  # Use dark variant
+#    };
+#    iconTheme = {
+#      package = pkgs.adwaita-icon-theme;
+#      name = "Adwaita";
+#    };
+  };
 
   # DConf settings for GTK font rendering
   dconf.settings = {
@@ -68,6 +71,10 @@
     source = ./fonts/Kugile.ttf;
   };
 
+  # SSH Agent Configuration
+
+  services.ssh-agent.enable = true;
+
   fonts.fontconfig.enable = true;
 
   # Environment variables for better GTK rendering
@@ -77,6 +84,39 @@
     #GDK_DPI_SCALE = "1";
     # Make Firefox use Wayland when available, as opposed to XWayland
     MOZ_ENABLE_WAYLAND = "1";
+    TERMINAL = "kitty";
+    DEFAULT_BROWSER = "firefox";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      # Terminal
+      "x-scheme-handler/terminal" = [ "kitty.desktop" ];
+      "terminal-emulator" = [ "kitty.desktop" ];
+      "x-terminal-emulator" = [ "kitty.desktop" ];
+      # Web 
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/about" = [ "firefox.desktop" ];
+      "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      # Images
+      "image/jpeg" = [ "swappy.desktop" ];
+      "image/png" = [ "swappy.desktop" ];
+      "image/webp" = [ "swappy.desktop" ];
+    };
+  };
+
+  # Custom swappy .desktop for automatic image opening
+  xdg.desktopEntries.swappy = {
+    name = "Swappy";
+    genericName = "Image Editor";
+    exec = "swappy -f %f"; # The %f tells Swappy to take the file path as an argument
+    icon = "swappy";
+    terminal = false;
+    categories = [ "Graphics" ];
+    mimeType = [ "image/png" "image/jpeg" "image/jpg" "image/webp" ];
   };
 
   # Let Home Manager install and manage itself.

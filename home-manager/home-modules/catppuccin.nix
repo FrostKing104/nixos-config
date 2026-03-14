@@ -5,20 +5,37 @@
   ];
 
   catppuccin = {
+    ## This would enable catppuccin globally - perhaps good for a new build, but not an established one
     # enable = true;
     flavor = "mocha";  # or "latte", "frappe", "macchiato"
-    accent = "lavender";   # or other accent colors
+    accent = "lavender";   
     
-    # REMOVED: gtk.enable = true; - This option no longer exists
-    
-    # You can enable other components
-    chromium.enable = true;
+    # Specific programs
 
+    chromium = {
+      enable = true;
+      flavor = "mocha";
+    };
+
+    element-desktop = {
+      enable = true;
+      accent = "green";
+    };
 
     cava = {
       enable = true;
       flavor = "mocha";
       transparent = true;
+    };
+
+    obs = {
+      enable = true;
+      flavor = "mocha";
+    };
+
+    opencode = {
+      enable = true;
+      flavor = "mocha";
     };
 
     hyprlock = {

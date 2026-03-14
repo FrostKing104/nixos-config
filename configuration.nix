@@ -1,15 +1,8 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the
 # configuration.nix(5) man page and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, inputs, lib, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
-let
-  unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-  #  aagl = import (builtins.fetchTarball {
-  #    url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/release-25.05.tar.gz";
-  #    sha256 = "01nm4qvp6mbyc96ff2paccwcx0clvg1mvpxg5y6d17db9ds7j8kl";
-  #  });
-in
 {
   # --- Imports --- #
   imports =
@@ -17,8 +10,8 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./packages.nix
-      ./hyprland.nix
-      # aagl.module
+      ./hyprland.nix 
+      ./sddm.nix
     ];
 
   # --- Bootloader & Kernel --- #
@@ -26,33 +19,55 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 5;
 
+  # ---- Framwork / Laptop Specific Configurations ---- #
+
+  # --- Framework Specific --- #
+
+  # Enable fwupd for firmware updates
+  services.fwupd.enable = true;
+  
+  # --- Laptop Specific --- #
+
+  # Enable iio sensor detection
+  hardware.sensor.iio.enable = lib.mkDefault true;
+
+  # ---- End of Framework  Laptop Specific Configurations ---- #
+
   # 5. IP forwarding (The useRoutingFeatures="both" handles this, but explicit setup is safe)
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
-  # --- File Systems --- #
-  # (Using hardware-configuration.nix for fileSystems; nothing overridden here.)
-
   # --- Networking & Firewall --- #
-  networking.hostName = "framework"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "framework"; # Define hostname.
+    networkmanager.enable = true;
+    # Open ports in the firewall
+    firewall = {
+      enable = true;
+      extraForwardRules = "accept";
+      trustedInterfaces = [ "docker0" "tailscale0" ];
+      allowedTCPPorts = [ 4713 53 ];
+      allowedUDPPorts = [ 53 67 ];
+      # Supposed to prevent loss of internet when using the tailscale exit node
+      checkReversePath = "loose";
+    };
+  };
 
-  # Enable networking
-  networking.networkmanager.enable = true;
 
-  # Open ports in the firewall.
-  networking.firewall.enable = true;
+  # -- Printing -- #
 
-  # --- Waydroid Fix ---
-  networking.firewall.extraForwardRules = "accept";
-  networking.firewall.allowedTCPPorts = [ 4713 53 ];
-  networking.firewall.allowedUDPPorts = [ 53 67 ];
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
-  # 4. CRITICAL FIX: Allow WireGuard packets (Tailscale's tunnel) to pass through NixOS firewall
-  # This prevents loss of internet when using the exit node.
-  networking.firewall.checkReversePath = "loose";
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip pkgs.epson-escpr ];
+  };
 
   # --- Hardware Support (GPU, Sound, Bluetooth, etc.) --- #
   # Enable Bluetooth
@@ -60,7 +75,9 @@ in
   hardware.bluetooth.enable = true;
 
   # Enable 32 Bit (For Epic Games Store)
-  hardware.graphics.enable32Bit = true;
+  hardware.graphics = {
+    enable32Bit = true;
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -72,81 +89,50 @@ in
     pulse.enable = true;
   };
 
-  # Enable iio sensor detection
-  hardware.sensor.iio.enable = lib.mkDefault true;
-
   # Enable OpenTabletDriver for pen tablets
   hardware.opentabletdriver.enable = true;
 
   # Specify Intel
-  services.xserver.videoDrivers = [ "intel" ];
+  #services.xserver.videoDrivers = [ "intel" ];
 
   # --- System Services --- #
+  # Shell #
+  services.noctalia-shell.enable = true;
+
   # GTK Configuration
   programs.dconf.enable = true;
   services.dbus.enable = true;
 
-  # Enable fwupd for firmware updates
-  services.fwupd.enable = true;
-
   # Playerctl
   services.playerctld.enable = true;
 
+  # OpenSSH
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true; 
+    openFirewall = false;
+  };
+  
   # Enable Virtualisation
   virtualisation.libvirtd.enable = true;
 
-  # Configure waydroid-helper
-  environment.systemPackages = [ pkgs.waydroid-helper ];
-  systemd = {
-    # 1. Fixes the SYSTEM service (waydroid-mount.service)
-    services.waydroid-mount = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        # This is the fix: Replaces '/usr/bin/waydroid-helper'
-        ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --start-mount";
-      };
-    };
-
-    # 2. Fixes and enables the USER service (waydroid-monitor.service)
-    user.services.waydroid-monitor = {
-      wantedBy = [ "graphical-session.target" ];
-      serviceConfig = {
-        # This is the same fix for the user service
-        ExecStart = "${pkgs.waydroid-helper}/bin/waydroid-helper --monitor";
-      };
-    };
-  };
-
   # Tailscale
-  # 1. Enable Tailscale service
-  services.tailscale.enable = true;
-
-  # 2. Configure Tailscale to handle routing features (subnet routes and exit nodes)
-  services.tailscale.useRoutingFeatures = "server";
-
-  # 3. Add the flag to the 'tailscale up' command, making the machine advertise itself as an Exit Node.
-  services.tailscale.extraUpFlags = [
-    "--advertise-exit-node"
-  ];
+  services.tailscale = { 
+    enable = true;
+    useRoutingFeatures = "server";
+    extraUpFlags = [
+      "--advertise-exit-node"
+    ];
+  };
 
   # Enable Fstrim
   services.fstrim.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
   # --- X11 & Desktop Environment --- #
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+    
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "catppuccin-mocha";
-
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -165,7 +151,7 @@ in
   users.users.anklus = {
     isNormalUser = true;
     description = "Anklus";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "i2c" "networkmanager" "wheel" "input" "video" "render" "terraria" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
@@ -205,7 +191,7 @@ in
     type = "fcitx5";
     enable = true;
     fcitx5.addons = with pkgs; [
-      fcitx5-mozc     # This should be here
+      fcitx5-mozc        
       fcitx5-gtk
       fcitx5-tokyonight
       qt6Packages.fcitx5-configtool
@@ -217,14 +203,14 @@ in
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
+    noto-fonts-color-emoji
     fira-code
     dejavu_fonts
     font-awesome
     liberation_ttf
-    ubuntu-classic
     jetbrains-mono
+    ubuntu-classic
     source-han-sans
     source-han-serif
     vista-fonts
@@ -251,7 +237,7 @@ in
   # Enable experimental features
   nix.settings = {
     extra-experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https.ezkea.cachix.org" ];
+    substituters = [ "https://ezkea.cachix.org" ];
     trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
   };
 
@@ -261,9 +247,13 @@ in
   # --- Garbage Collection (system configurations older than 30 days will be deleted weekly) --- #
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+    dates = "daily";
+    options = "--delete-older-than 20d";
+    persistent = true;
   };
+
+  # Limit the generation count to 15 total
+  boot.loader.systemd-boot.configurationLimit = 15;
 
   # --- Environment Variables & Programs --- #
   # Allow App Images to work properly
@@ -273,18 +263,16 @@ in
   # Environment Variables
   environment.variables = {
     FZF_BASE = "${pkgs.fzf}/share/fzf";
+    TERMINAL = "kitty";
   };
 
   # An Anime Game Launcher:
-  # programs.anime-game-launcher.enable = true;
-  # programs.anime-games-launcher.enable = true;
-  # programs.honkers-railway-launcher.enable = false;
-  # programs.honkers-launcher.enable = false;
-  # programs.wavey-launcher.enable = false;
-  # programs.sleepy-launcher.enable = false;
-
-  # Enable some programs for SUID wrappers
-  # programs.mtr.enable = true;
+  programs.anime-game-launcher.enable = true;
+  #programs.anime-games-launcher.enable = true;
+  #programs.honkers-railway-launcher.enable = false;
+  #programs.honkers-launcher.enable = false;
+  #programs.wavey-launcher.enable = true;
+  programs.sleepy-launcher.enable = true;
 
   # --- System State --- #
   # NixOS release version for stateful data and default settings
