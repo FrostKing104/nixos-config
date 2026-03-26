@@ -3,9 +3,10 @@
 let
   # --- 1. Helper for Obsidian ---
   # Re-defining the fixed script so we can reference it in the menu commands
+  # LAPTOP SPECIFIC: Switched `exec ${pkgs.obsidian}/bin/obsidian --ozone-platform=x11 "$@"` -> `exec ${pkgs.obsidian}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"` due to fractional scaling causing blurry text on laptop. For desktop, switch back for pen tablet functionality.
   obsidian-fixed = pkgs.writeShellScriptBin "obsidian-fixed" ''
     #!${pkgs.runtimeShell}
-    exec ${pkgs.obsidian}/bin/obsidian --ozone-platform=x11 "$@"
+    exec ${pkgs.obsidian}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
   '';
 
   # --- 2. Your Menu Configuration ---

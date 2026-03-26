@@ -3,9 +3,10 @@
 
 let
   # Define the script here, inside the Home Manager module
+  # LAPTOP SPECIFIC: Switched `exec ${pkgs.obsidian}/bin/obsidian --ozone-platform=x11 "$@"` -> `exec ${pkgs.obsidian}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"` due to fractional scaling causing blurry text on laptop. For desktop, switch back for pen tablet functionality.
   obsidian-fixed = pkgs.writeShellScriptBin "obsidian-fixed" ''
     #!${pkgs.runtimeShell}
-    exec ${pkgs.obsidian}/bin/obsidian --ozone-platform=x11 "$@"
+    exec ${pkgs.obsidian}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
   '';
 in
 {
