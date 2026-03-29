@@ -30,17 +30,15 @@ let
       submenu = [
         { key = "m"; desc = "Main Vault";    cmd = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/45be03fe07ce1733"; }
         { key = "c"; desc = "College Vault"; cmd = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/bb1b079b93a59a4e"; }
-        { key = "w"; desc = "Writing Vault"; cmd = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/5088080f897a87ad"; }
-      ];
+        { key = "w"; desc = "Writing Vault"; cmd = "${obsidian-fixed}/bin/obsidian-fixed obsidian://vault/5088080f897a87ad"; }      ];
     }
     {
       key = "s";
       desc = "Screenshot";
       submenu = [
-        { key = "s"; desc = "Screen";  cmd = "hyprshot -m output"; }
-        { key = "r"; desc = "Region";  cmd = "hyprshot -m region"; }
-        { key = "p"; desc = "Window";  cmd = "hyprshot -m window"; }
-      ];
+        { key = "s"; desc = "Screen";  cmd = "bash -c 'hyprshot -m output --raw | tee >(wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\") | swappy -f -'"; }
+        { key = "r"; desc = "Region";  cmd = "bash -c 'hyprshot -m region --raw | tee >(wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\") | swappy -f -'"; }
+        { key = "w"; desc = "Window";  cmd = "bash -c 'hyprshot -m window --raw | tee >(wl-copy && notify-send \"Screenshot\" \"Copied to clipboard\") | swappy -f -'"; }      ];
     }
   ];
 
