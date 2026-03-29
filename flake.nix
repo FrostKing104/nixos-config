@@ -21,7 +21,10 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";

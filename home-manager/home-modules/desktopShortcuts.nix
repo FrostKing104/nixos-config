@@ -11,7 +11,6 @@ in
 {
   home.packages = [
     pkgs.chromium
-    pkgs.papirus-icon-theme
     obsidian-fixed # Add the script to your user's packages
     pkgs.obsidian  # Ensure the main obsidian package is installed for the user
   ];

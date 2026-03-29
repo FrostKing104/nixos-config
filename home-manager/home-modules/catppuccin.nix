@@ -8,7 +8,7 @@
     ## This would enable catppuccin globally - perhaps good for a new build, but not an established one
     # enable = true;
     flavor = "mocha";  # or "latte", "frappe", "macchiato"
-    accent = "lavender";   
+    accent = "mauve";   
     
     # Specific programs
 

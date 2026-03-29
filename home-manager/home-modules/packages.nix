@@ -83,6 +83,7 @@
     base16-schemes
     tokyonight-gtk-theme
     grimblast
+    catppuccin-gtk
     
     # ---- Flake Inputs / Custom ---- #
     inputs.nixos-unstable.legacyPackages.${pkgs.system}.quickshell

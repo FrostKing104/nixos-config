@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   # IMPORTS
@@ -35,19 +35,19 @@
 
  # GTK Configuration 
   gtk = {
-    enable = true;
+    enable = false;
     font = {
       name = "Ubuntu";
       size = 11;
     };
-#    theme = {
-#      package = pkgs.gnome-themes-extra;
-#      name = "Adwaita-dark";  # Use dark variant
-#    };
-#    iconTheme = {
-#      package = pkgs.adwaita-icon-theme;
-#      name = "Adwaita";
-#    };
+ #    theme = {
+ #      package = pkgs.gnome-themes-extra;
+ #      name = "Adwaita-dark";  # Use dark variant
+ #    };
+ #    iconTheme = {
+ #      package = pkgs.adwaita-icon-theme;
+ #      name = "Adwaita";
+ #    };
   };
 
   # DConf settings for GTK font rendering
@@ -79,7 +79,7 @@
 
   # Environment variables for better GTK rendering
   home.sessionVariables = {
-    #GTK_THEME = "Adwaita:dark";  # Back to manual GTK theme
+    GTK_THEME = "catppuccin-mocha-mauve-standard+default";
     GDK_SCALE = "1";
     #GDK_DPI_SCALE = "1";
     # Make Firefox use Wayland when available, as opposed to XWayland
