@@ -42,10 +42,10 @@
       fsType = "vfat";
     };
 
-    "/games" = {
-      device = "/dev/disk/by-uuid/460e9a24-b39c-4fce-859d-8ebf25e9f941";
-      fsType = "ext4";
-    };
+#    "/games" = {
+#      device = "/dev/disk/by-uuid/460e9a24-b39c-4fce-859d-8ebf25e9f941";
+#      fsType = "ext4";
+#    };
   };
 
   # --- Networking & Firewall --- #
