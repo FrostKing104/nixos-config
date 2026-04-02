@@ -7,7 +7,7 @@
     # Wofi Configuration (maps to ~/.config/wofi/config)
     settings = {
       show = "drun";
-      width = 750;
+      width = 380;
       height = 400;
       always_parse_args = true;
       show_all = false;
@@ -16,7 +16,7 @@
       print_command = true;
       insensitive = true;
       prompt = "";
-      columns = 2;
+      columns = 1;
       location = "top";
       y_offset = 100;
     };
@@ -60,7 +60,8 @@
       window {
         margin: 0px;
         padding: 10px;
-        border: 0.16em solid @lavender;
+        /* border: 0.16em solid @lavender; */
+        border: none;
         border-radius: 2px;
         background-color: @base;
         animation: slideIn 0.1s ease-in-out both;
