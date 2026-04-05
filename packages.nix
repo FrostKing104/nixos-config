@@ -60,6 +60,7 @@
     p7zip
     unrar
     gpu-screen-recorder
+    unzip
     
     # ---- Display Manager & Theming Assets ---- #
     # (These must be system-wide for SDDM to see them)
